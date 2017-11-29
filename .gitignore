@@ -1,0 +1,7 @@
+build/
+build-*
+*.user
+tags
+.vs*
+*.qmlc
+CMakeSettings.json
