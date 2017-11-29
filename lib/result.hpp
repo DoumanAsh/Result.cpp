@@ -91,8 +91,10 @@ class Result {
             }
         }
 
+        static constexpr bool is_move_noexcept = std::is_nothrow_move_constructible<Value>::value && std::is_nothrow_move_constructible<Error>::value;
+
         ///Move constructor
-        Result(Result&& right) noexcept : variant(right.variant), value(internal::storage_empty) {
+        Result(Result&& right) noexcept(is_move_noexcept) : variant(right.variant), value(internal::storage_empty) {
             switch (variant) {
                 case type::ok: ::new(&value.ok) Value(std::move(right.value.ok)); break;
                 case type::error: ::new(&value.error) Value(std::move(right.value.error)); break;
@@ -137,7 +139,7 @@ class Result {
 
         ///Attempts to unwrap result, yielding content of Err.
         ///
-        ///@throws Content of Error.
+        ///@throws If no error.
         constexpr Error& unwrap_err() {
             if (is_err()) {
                 return value.error;
@@ -151,6 +153,20 @@ class Result {
         ///@throws Content of Error.
         constexpr const Error& unwrap_err() const {
             return const_cast<Result*>(this)->unwrap_err();
+        }
+
+        ///Attempts to unwrap result, yielding const ref content of Ok.
+        ///
+        ///@throws Content of Error.
+        constexpr Value unwrap_or(Value&& other) {
+            return is_ok() ? value.ok : std::forward<Value>(other);
+        }
+
+        ///Attempts to unwrap result, yielding const ref content of Ok.
+        ///
+        ///@throws Content of Error.
+        constexpr Value unwrap_or(Value&& other) const {
+            return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
         }
 
 
