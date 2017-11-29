@@ -1,9 +1,10 @@
-#include <result.hpp>
 
 #include <vector>
 #include <iostream>
 #include <cassert>
 #include <string>
+
+#include <result.hpp>
 
 void try1() {
     const auto ok = result::Result<int, std::string>::ok(1);
@@ -40,9 +41,25 @@ void try2() {
     assert(ok_other_value == Vec({1, 2, 3, 4, 5}));
 }
 
+decltype(auto) return_pod_res_with_move() {
+    auto ok = result::Result<int, bool>::ok(1);
+    return ok;
+}
+
+decltype(auto) return_non_pod_res_with_move() {
+    auto ok = result::Result<std::vector<int>, std::string>::ok(1, 2);
+    return ok;
+}
+
 int main() {
     try1();
     try2();
+    auto pod_moved = return_pod_res_with_move();
+    assert(pod_moved.is_ok());
+    assert(pod_moved.unwrap() == 1);
+    auto non_pod_moved = return_non_pod_res_with_move();
+    assert(non_pod_moved.is_ok());
+    assert(non_pod_moved.unwrap() == std::vector<int>(1, 2));
 
     std::cout << "All ok, onii-chan!\n";
 }
