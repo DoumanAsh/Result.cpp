@@ -64,6 +64,8 @@ class Result {
 
     //Default methods to ensure proper work with non-POD
     public:
+        Result() = delete;
+
         ///Creates Ok variant.
         template<class... T>
         static decltype(auto) ok(T&&... value) noexcept {
