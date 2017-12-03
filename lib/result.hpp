@@ -98,8 +98,8 @@ class Result {
 
         Result(Result&& right) noexcept(is_move_const_noexcept) : variant(right.variant), value(internal::storage_empty) {
             switch (variant) {
-                case type::ok: value.ok = std::move(right.value.ok); break;
-                case type::error: value.error = std::move(right.value.error); break;
+                case type::ok: ::new(&value.ok) Value(std::move(right.value.ok)); break;
+                case type::error: ::new(&value.error) Error(std::move(right.value.error)); break;
             }
         }
 

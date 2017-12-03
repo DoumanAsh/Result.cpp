@@ -40,25 +40,23 @@ TEST_CASE("try result 2") {
 
     REQUIRE(ok_value == Vec({1, 2, 3, 4, 5}));
     REQUIRE(ok_other_value == Vec({1, 2, 3, 4, 5}));
-
 }
 
-decltype(auto) return_pod_res_with_move() {
+decltype(auto) return_pod_res() {
     auto ok = result::Result<int, bool>::ok(1);
     return ok;
 }
 
-decltype(auto) return_non_pod_res_with_move() {
+decltype(auto) return_non_pod_res() {
     auto ok = result::Result<std::vector<int>, std::string>::ok(1, 2);
     return ok;
 }
 
 TEST_CASE("try return result") {
-    auto pod_moved = return_pod_res_with_move();
+    auto pod_moved = return_pod_res();
     REQUIRE(pod_moved.is_ok());
     REQUIRE(pod_moved.unwrap() == 1);
-    auto non_pod_moved = return_non_pod_res_with_move();
+    auto non_pod_moved = return_non_pod_res();
     REQUIRE(non_pod_moved.is_ok());
     REQUIRE(non_pod_moved.unwrap() == std::vector<int>(1, 2));
-
 }

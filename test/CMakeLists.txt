@@ -18,3 +18,6 @@ add_executable(utest ${test_SRC})
 add_dependencies(utest catch)
 target_link_libraries(utest result)
 target_include_directories(utest PUBLIC ${catch_dir})
+
+enable_testing()
+add_test(NAME test COMMAND utest)
