@@ -12,7 +12,7 @@ endmacro(msvc_static_crt)
 
 # Set MVSC flags
 macro(msvc_set_flags_if)
-    if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    if(MSVC)
         set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${ARGV0}")
         set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${ARGV0}")
     endif()

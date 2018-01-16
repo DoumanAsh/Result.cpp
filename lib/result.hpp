@@ -135,7 +135,7 @@ class Result {
 
         ///@returns true If Ok value.
         constexpr explicit operator bool() const noexcept {
-            this->is_ok();
+            return this->is_ok();
         }
 
         ///Attempts to unwrap result, yielding content of Ok.
