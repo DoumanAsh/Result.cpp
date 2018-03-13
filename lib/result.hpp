@@ -57,10 +57,10 @@ class Result {
         };
 
         type variant;
-        storage value;
+        storage store;
 
         template<class... A>
-        explicit Result(type variant, A&&... value) noexcept : variant(variant), value(std::forward<A>(value)...) {}
+        explicit Result(type variant, A&&... value) noexcept : variant(variant), store(std::forward<A>(value)...) {}
 
     //Default methods to ensure proper work with non-POD
     public:
@@ -82,13 +82,13 @@ class Result {
         ~Result() noexcept {
             if constexpr (std::is_destructible<Value>::value) {
                 if (variant == type::ok) {
-                    value.ok.~Value();
+                    store.ok.~Value();
                 }
             }
 
             if constexpr (std::is_destructible<Error>::value) {
                 if (variant == type::error) {
-                    value.error.~Error();
+                    store.error.~Error();
                 }
             }
         }
@@ -96,10 +96,10 @@ class Result {
         ///Move constructor
         static constexpr bool is_move_const_noexcept = std::is_nothrow_move_constructible<Value>::value && std::is_nothrow_move_constructible<Error>::value;
 
-        Result(Result&& right) noexcept(is_move_const_noexcept) : variant(right.variant), value(internal::storage_empty) {
+        Result(Result&& right) noexcept(is_move_const_noexcept) : variant(right.variant), store(internal::storage_empty) {
             switch (variant) {
-                case type::ok: ::new(&value.ok) Value(std::move(right.value.ok)); break;
-                case type::error: ::new(&value.error) Error(std::move(right.value.error)); break;
+                case type::ok: ::new(&store.ok) Value(std::move(right.store.ok)); break;
+                case type::error: ::new(&store.error) Error(std::move(right.store.error)); break;
             }
         }
 
@@ -114,8 +114,8 @@ class Result {
             }
 
             switch (variant) {
-                case type::ok: value.ok = std::move(right.value.ok); break;
-                case type::error: value.error = std::move(right.value.error); break;
+                case type::ok: store.ok = std::move(right.store.ok); break;
+                case type::error: store.error = std::move(right.store.error); break;
             }
 
             return *this;
@@ -138,57 +138,132 @@ class Result {
             return this->is_ok();
         }
 
+        ///Returns pointer to underlying value.
+        ///
+        ///@retval nullptr If not-OK.
+        constexpr Value* value() {
+            if (is_ok()) {
+                return &store.ok;
+            }
+            else {
+                return nullptr;
+            }
+        }
+        ///Returns pointer to underlying value.
+        ///
+        ///@retval nullptr If not-OK.
+        constexpr const Value* value() const {
+            return const_cast<Result*>(this)->value();
+        }
+        ///Returns pointer to underlying error.
+        ///
+        ///@retval nullptr If not-OK.
+        constexpr Error* error() {
+            if (is_err()) {
+                return &store.error;
+            }
+            else {
+                return nullptr;
+            }
+        }
+        ///Returns pointer to underlying error.
+        ///
+        ///@retval nullptr If not-OK.
+        constexpr const Error* error() const {
+            return const_cast<Result*>(this)->error();
+        }
+
         ///Attempts to unwrap result, yielding content of Ok.
         ///
         ///@throws Content of Error.
-        constexpr Value& unwrap() {
+        constexpr Value& unwrap() & {
             //TODO: consider if non-const reference is good idea?
             if (is_ok()) {
-                return value.ok;
+                return store.ok;
             } else {
-                throw value.error;
+                throw store.error;
             }
         }
-
         ///Attempts to unwrap result, yielding const ref content of Ok.
         ///
         ///@throws Content of Error.
-        constexpr const Value& unwrap() const {
+        constexpr const Value& unwrap() const & {
+            return const_cast<Result*>(this)->unwrap();
+        }
+        ///Attempts to unwrap result, yielding content of Ok.
+        ///
+        ///@throws Content of Error.
+        constexpr Value&& unwrap() && {
+            if (is_ok()) {
+                return store.ok;
+            } else {
+                throw store.error;
+            }
+        }
+        ///Attempts to unwrap result, yielding content of Ok.
+        ///
+        ///@throws Content of Error.
+        constexpr const Value&& unwrap() const && {
             return const_cast<Result*>(this)->unwrap();
         }
 
         ///Attempts to unwrap result, yielding content of Err.
         ///
         ///@throws If no error.
-        constexpr Error& unwrap_err() {
+        constexpr Error& unwrap_err() & {
             if (is_err()) {
-                return value.error;
+                return store.error;
             } else {
                 throw "Surprisingly no error...";
             }
         }
-
         ///Attempts to unwrap result, yielding content of Err.
         ///
         ///@throws Content of Error.
-        constexpr const Error& unwrap_err() const {
+        constexpr const Error& unwrap_err() const & {
+            return const_cast<Result*>(this)->unwrap_err();
+        }
+        ///Attempts to unwrap result, yielding content of Err.
+        ///
+        ///@throws If no error.
+        constexpr Error& unwrap_err() && {
+            if (is_err()) {
+                return store.error;
+            } else {
+                throw "Surprisingly no error...";
+            }
+        }
+        ///Attempts to unwrap result, yielding content of Err.
+        ///
+        ///@throws Content of Error.
+        constexpr const Error& unwrap_err() const && {
             return const_cast<Result*>(this)->unwrap_err();
         }
 
         ///Attempts to unwrap result, yielding const ref content of Ok.
         ///
         ///@throws Content of Ok.
-        constexpr Value unwrap_or(Value&& other) {
-            return is_ok() ? value.ok : std::forward<Value>(other);
+        constexpr Value&& unwrap_or(Value&& other) & {
+            return is_ok() ? std::move(store.ok) : std::move(other);
         }
-
         ///Attempts to unwrap result, yielding const ref content of Ok.
         ///
         ///@throws Content of Ok.
-        constexpr Value unwrap_or(Value&& other) const {
+        constexpr const Value&& unwrap_or(Value&& other) const & {
             return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
         }
-
+        ///Attempts to unwrap result, yielding const ref content of Ok.
+        ///
+        ///@throws Content of Ok.
+        constexpr Value&& unwrap_or(Value&& other) && {
+            return is_ok() ? std::move(store.ok) : std::move(other);
+        }
+        ///Attempts to unwrap result, yielding const ref content of Ok.
+        ///
+        ///@throws Content of Ok.
+        constexpr const Value&& unwrap_or(Value&& other) const && {
+            return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
+        }
 
 }; //Result
 
