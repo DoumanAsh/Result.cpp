@@ -34,13 +34,16 @@ class Result {
             Value ok;
             Error error;
 
+            static constexpr bool is_value_noexcept = std::is_nothrow_constructible<Value>::value;
+            static constexpr bool is_error_noexcept = std::is_nothrow_constructible<Error>::value;
+
             ///construct value
             template<class... A>
-            explicit storage(internal::storage_ok_t, A&&... a ): ok(std::forward<A>(a)...) {}
+            explicit storage(internal::storage_ok_t, A&&... a ) noexcept(is_value_noexcept) : ok(std::forward<A>(a)...) {}
 
             ///construct error
             template<class... A>
-            explicit storage(internal::storage_error_t, A&&... a ): error(std::forward<A>(a)...) {}
+            explicit storage(internal::storage_error_t, A&&... a ) noexcept(is_error_noexcept) : error(std::forward<A>(a)...) {}
 
             ///Empty constructor for Result's copy/move
             explicit storage(internal::storage_empty_t) noexcept {}
@@ -59,8 +62,13 @@ class Result {
         type variant;
         storage store;
 
+        static constexpr bool is_constructor_noexcept = storage::is_value_noexcept && storage::is_error_noexcept;
+        static constexpr bool is_destructor_noexcept = std::is_nothrow_destructible<Value>::value && std::is_nothrow_destructible<Error>::value;
+        static constexpr bool is_move_const_noexcept = std::is_nothrow_move_constructible<Value>::value && std::is_nothrow_move_constructible<Error>::value;
+        static constexpr bool is_move_assignment_noexcept = std::is_nothrow_move_assignable<Value>::value && std::is_nothrow_move_assignable<Error>::value;
+
         template<class... A>
-        explicit Result(type variant, A&&... value) noexcept : variant(variant), store(std::forward<A>(value)...) {}
+        explicit Result(type variant, A&&... value) noexcept(is_constructor_noexcept) : variant(variant), store(std::forward<A>(value)...) {}
 
     //Default methods to ensure proper work with non-POD
     public:
@@ -79,7 +87,7 @@ class Result {
         }
 
         ///Destructor that invokes, if required, underlying storage's destructor.
-        ~Result() noexcept {
+        ~Result() noexcept(is_destructor_noexcept) {
             if constexpr (std::is_destructible<Value>::value) {
                 if (variant == type::ok) {
                     store.ok.~Value();
@@ -94,9 +102,10 @@ class Result {
         }
 
         ///Move constructor
-        static constexpr bool is_move_const_noexcept = std::is_nothrow_move_constructible<Value>::value && std::is_nothrow_move_constructible<Error>::value;
-
         Result(Result&& right) noexcept(is_move_const_noexcept) : variant(right.variant), store(internal::storage_empty) {
+            static_assert(std::is_move_constructible<Value>::value, "Value is not move constructable");
+            static_assert(std::is_move_constructible<Error>::value, "Error is not move constructable");
+
             switch (variant) {
                 case type::ok: ::new(&store.ok) Value(std::move(right.store.ok)); break;
                 case type::error: ::new(&store.error) Error(std::move(right.store.error)); break;
@@ -104,9 +113,10 @@ class Result {
         }
 
         ///Move assignment
-        static constexpr bool is_move_assignment_noexcept = std::is_nothrow_move_assignable<Value>::value && std::is_nothrow_move_assignable<Error>::value;
-
         Result& operator=(Result&& right) noexcept(is_move_assignment_noexcept) {
+            static_assert(std::is_move_assignable<Value>::value, "Value is not move assignable");
+            static_assert(std::is_move_assignable<Error>::value, "Error is not move assignable");
+
             if (right.variant != variant) {
                 //Since different type we should clean up old value.
                 ~Result();
@@ -142,12 +152,7 @@ class Result {
         ///
         ///@retval nullptr If not-OK.
         constexpr Value* value() {
-            if (is_ok()) {
-                return &store.ok;
-            }
-            else {
-                return nullptr;
-            }
+            return is_ok() ? &store.ok : nullptr;
         }
         ///Returns pointer to underlying value.
         ///
@@ -159,12 +164,7 @@ class Result {
         ///
         ///@retval nullptr If not-OK.
         constexpr Error* error() {
-            if (is_err()) {
-                return &store.error;
-            }
-            else {
-                return nullptr;
-            }
+            return is_err() ? &store.error : nullptr;
         }
         ///Returns pointer to underlying error.
         ///
@@ -219,7 +219,7 @@ class Result {
         }
         ///Attempts to unwrap result, yielding content of Err.
         ///
-        ///@throws Content of Error.
+        ///@throws If no error.
         constexpr const Error& unwrap_err() const & {
             return const_cast<Result*>(this)->unwrap_err();
         }
@@ -240,27 +240,19 @@ class Result {
             return const_cast<Result*>(this)->unwrap_err();
         }
 
-        ///Attempts to unwrap result, yielding const ref content of Ok.
-        ///
-        ///@throws Content of Ok.
+        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         constexpr Value&& unwrap_or(Value&& other) & {
             return is_ok() ? std::move(store.ok) : std::move(other);
         }
-        ///Attempts to unwrap result, yielding const ref content of Ok.
-        ///
-        ///@throws Content of Ok.
+        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         constexpr const Value&& unwrap_or(Value&& other) const & {
             return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
         }
-        ///Attempts to unwrap result, yielding const ref content of Ok.
-        ///
-        ///@throws Content of Ok.
+        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         constexpr Value&& unwrap_or(Value&& other) && {
             return is_ok() ? std::move(store.ok) : std::move(other);
         }
-        ///Attempts to unwrap result, yielding const ref content of Ok.
-        ///
-        ///@throws Content of Ok.
+        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         constexpr const Value&& unwrap_or(Value&& other) const && {
             return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
         }
