@@ -22,7 +22,7 @@ namespace internal {
  * * Ok - contains value with result of computation.
  * * Error - contains error description.
  *
- * The intention is to create similar to Rust Result type.
+ * The intention is to create similar to Rust [Result](https://doc.rust-lang.org/std/result/enum.Result.html) type.
  */
 template<class Value, class Error>
 class Result {
