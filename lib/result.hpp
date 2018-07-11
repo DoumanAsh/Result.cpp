@@ -5,8 +5,8 @@
 
 namespace result {
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 namespace internal {
-
     struct storage_ok_t { constexpr storage_ok_t() noexcept {} };
     struct storage_error_t { constexpr storage_error_t() noexcept {} };
     struct storage_empty_t { constexpr storage_empty_t() noexcept {} };
@@ -15,12 +15,33 @@ namespace internal {
     constexpr storage_error_t storage_error;
     constexpr storage_empty_t storage_empty;
 }
+#endif
 
 /**
  * Result type that represents two-possible outcomes:
  *
- * * Ok - contains value with result of computation.
+ * * Value - contains value with result of computation.
  * * Error - contains error description.
+ *
+ * ## Usage
+ *
+ * ~~~~~~~~~~~~~~~
+ * #include <iostream>
+ *
+ * #include "result.hpp"
+ *
+ * decltype(auto) get_something() {
+ *     //Do some work.
+ *
+ *     result::Result<int, std::string>::ok(1)
+ * }
+ *
+ * int main() {
+ *     const auto result = get_something();
+ *
+ *     std::cout << "Result=" << result.unwrap_or(0) << "\n";
+ * }
+ * ~~~~~~~~~~~~~~~
  *
  * The intention is to create similar to Rust [Result](https://doc.rust-lang.org/std/result/enum.Result.html) type.
  */
@@ -28,7 +49,6 @@ template<class Value, class Error>
 class Result {
     //It might be a bad idea to allow Value and Error to be the same
     //but for now lets leave it as it is.
-
     private:
         union storage {
             Value ok;
@@ -39,11 +59,11 @@ class Result {
 
             ///construct value
             template<class... A>
-            explicit storage(internal::storage_ok_t, A&&... a ) noexcept(is_value_noexcept) : ok(std::forward<A>(a)...) {}
+            explicit storage(internal::storage_ok_t, A&&... a) noexcept(is_value_noexcept) : ok(std::forward<A>(a)...) {}
 
             ///construct error
             template<class... A>
-            explicit storage(internal::storage_error_t, A&&... a ) noexcept(is_error_noexcept) : error(std::forward<A>(a)...) {}
+            explicit storage(internal::storage_error_t, A&&... a) noexcept(is_error_noexcept) : error(std::forward<A>(a)...) {}
 
             ///Empty constructor for Result's copy/move
             explicit storage(internal::storage_empty_t) noexcept {}
@@ -72,7 +92,9 @@ class Result {
 
     //Default methods to ensure proper work with non-POD
     public:
+        ///OK type
         using Ok = Value;
+        ///Error type
         using Err = Error;
 
         Result() = delete;
@@ -260,6 +282,7 @@ class Result {
             return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
         }
 
+        ///Describes @ref map argument
         template<class T>
         using map_fn_tp = T(Value);
 
@@ -278,6 +301,7 @@ class Result {
             }
         }
 
+        ///Describes @ref map_err argument
         template<class T>
         using map_err_fn_tp = T(Error);
 
