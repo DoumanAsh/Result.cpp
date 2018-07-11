@@ -13,6 +13,20 @@ matrix:
                 - g++-7
           env:
             - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - os: linux
+          dist: trusty
+          compiler: clang
+          addons:
+            apt:
+              sources:
+                - llvm-toolchain-trusty-5.0
+                - ubuntu-toolchain-r-test
+              packages:
+                - clang-5.0
+                - libstdc++-7-dev
+          env:
+            - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+
 
 
 before_install:
@@ -23,4 +37,4 @@ script:
     - cd build/
     - cmake ../ -DUNIT_TEST=On
     - cmake --build .
-    - ctest
+    - ctest --output-on-failure
