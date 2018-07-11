@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classresult_1_1_result-members.html">List of all members</a>  </div>
@@ -100,6 +101,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><code>#include &lt;<a class="el" href="result_8hpp_source.html">result.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a1cc9bba94ca5853e7557d5ec0967d945"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1cc9bba94ca5853e7557d5ec0967d945"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Ok</b> = Value</td></tr>
+<tr class="separator:a1cc9bba94ca5853e7557d5ec0967d945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ba41d63e5b74a75b6fb18d38b041cff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ba41d63e5b74a75b6fb18d38b041cff"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Err</b> = Error</td></tr>
+<tr class="separator:a8ba41d63e5b74a75b6fb18d38b041cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04bf83d7f68db0216080ecd1c10c0529"><td class="memTemplParams" colspan="2"><a class="anchor" id="a04bf83d7f68db0216080ecd1c10c0529"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:a04bf83d7f68db0216080ecd1c10c0529"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>map_fn_tp</b> = T(Value)</td></tr>
+<tr class="separator:a04bf83d7f68db0216080ecd1c10c0529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a5b2fa6f361a8458d0870da47e9e217"><td class="memTemplParams" colspan="2"><a class="anchor" id="a2a5b2fa6f361a8458d0870da47e9e217"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:a2a5b2fa6f361a8458d0870da47e9e217"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>map_err_fn_tp</b> = T(Error)</td></tr>
+<tr class="separator:a2a5b2fa6f361a8458d0870da47e9e217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abed83b85588aee8e46d851631b7517d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abed83b85588aee8e46d851631b7517d2"></a>
@@ -172,6 +190,14 @@ constexpr Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a
 constexpr const Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a7e0294d8f33377c422bd0229840f321b">unwrap_or</a> (Value &amp;&amp;other) const &amp;&amp;</td></tr>
 <tr class="memdesc:a7e0294d8f33377c422bd0229840f321b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br /></td></tr>
 <tr class="separator:a7e0294d8f33377c422bd0229840f321b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75ce96506ea0b0782643f498a67f51d4"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a75ce96506ea0b0782643f498a67f51d4"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; T, Error &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a75ce96506ea0b0782643f498a67f51d4">map</a> (map_fn_tp&lt; T &gt; *fn)</td></tr>
+<tr class="memdesc:a75ce96506ea0b0782643f498a67f51d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps OK value of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a75ce96506ea0b0782643f498a67f51d4">More...</a><br /></td></tr>
+<tr class="separator:a75ce96506ea0b0782643f498a67f51d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909965783565105748e8eda93b7ef207"><td class="memTemplParams" colspan="2">template&lt;class E &gt; </td></tr>
+<tr class="memitem:a909965783565105748e8eda93b7ef207"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; Value, E &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a909965783565105748e8eda93b7ef207">map_err</a> (map_err_fn_tp&lt; E &gt; *fn)</td></tr>
+<tr class="memdesc:a909965783565105748e8eda93b7ef207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps Err error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a909965783565105748e8eda93b7ef207">More...</a><br /></td></tr>
+<tr class="separator:a909965783565105748e8eda93b7ef207"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -312,6 +338,68 @@ template&lt;class Value, class Error&gt; </div>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>true If Ok value. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a75ce96506ea0b0782643f498a67f51d4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Value, class Error&gt; </div>
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt;T, Error&gt; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::map </td>
+          <td>(</td>
+          <td class="paramtype">map_fn_tp&lt; T &gt; *&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maps OK value of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type. </p>
+<dl class="section return"><dt>Returns</dt><dd>New result. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a909965783565105748e8eda93b7ef207"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Value, class Error&gt; </div>
+<div class="memtemplate">
+template&lt;class E &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt;Value, E&gt; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::map_err </td>
+          <td>(</td>
+          <td class="paramtype">map_err_fn_tp&lt; E &gt; *&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maps Err error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type. </p>
+<dl class="section return"><dt>Returns</dt><dd>New result. </dd></dl>
 
 </div>
 </div>
