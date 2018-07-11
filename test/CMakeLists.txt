@@ -3,7 +3,7 @@ ExternalProject_Add(
     catch
     PREFIX "catch"
     DOWNLOAD_NO_EXTRACT 1
-    URL https://github.com/catchorg/Catch2/releases/download/v2.2.1/catch.hpp
+    URL https://github.com/catchorg/Catch2/releases/download/v2.2.2/catch.hpp
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
@@ -18,5 +18,4 @@ add_dependencies(utest catch)
 target_link_libraries(utest result)
 target_include_directories(utest PUBLIC ${catch_dir})
 
-enable_testing()
-add_test(NAME test COMMAND utest)
+add_test(NAME result COMMAND utest)

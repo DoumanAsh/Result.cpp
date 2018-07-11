@@ -41,6 +41,7 @@ add_subdirectory("lib/")
 ############
 option(UNIT_TEST "Build unit tests" OFF)
 if (UNIT_TEST)
+    enable_testing()
     add_subdirectory("test/")
 endif()
 

@@ -87,3 +87,84 @@ TEST_CASE("try return result") {
     REQUIRE(*(non_pod_moved.value()) == std::vector<int>(1, 2));
     REQUIRE(non_pod_moved.error() == nullptr);
 }
+
+TEST_CASE("try map pod type from return") {
+    auto lambda = [](int value) {
+        REQUIRE(value == 1);
+        return 2;
+    };
+
+    auto lambda_err = [](bool value) {
+        REQUIRE(value == false);
+        return 0;
+    };
+
+    auto map_good = return_pod_res().map<int>(lambda);
+    REQUIRE(map_good.is_ok());
+    REQUIRE(map_good.unwrap() == 2);
+    REQUIRE(map_good.value() != nullptr);
+    REQUIRE(*(map_good.value()) == 2);
+    REQUIRE(map_good.error() == nullptr);
+
+    auto new_map_good = map_good.map_err<int>(lambda_err);
+    REQUIRE(new_map_good.is_ok());
+    REQUIRE(new_map_good.unwrap() == 2);
+    REQUIRE(new_map_good.value() != nullptr);
+    REQUIRE(*(new_map_good.value()) == 2);
+    REQUIRE(new_map_good.error() == nullptr);
+
+    auto map_error = decltype(return_pod_res())::error(false).map<int>(lambda);
+    REQUIRE(map_error.is_err());
+    REQUIRE(map_error.value() == nullptr);
+    REQUIRE(map_error.error() != nullptr);
+    REQUIRE(map_error.unwrap_err() == false);
+    REQUIRE(*(map_error.error()) == false);
+
+    auto new_map_error = map_error.map_err<int>(lambda_err);
+    REQUIRE(map_error.is_err());
+    REQUIRE(map_error.value() == nullptr);
+    REQUIRE(map_error.error() != nullptr);
+    REQUIRE(map_error.unwrap_err() == 0);
+    REQUIRE(*(map_error.error()) == 0);
+}
+
+TEST_CASE("try map non-pod type from return") {
+    decltype(auto) lambda = [](std::vector<int> value) {
+        REQUIRE(value == *return_non_pod_res().value());
+        return std::vector({3, 4, 5});
+    };
+
+    decltype(auto) lambda_err = [](std::string value) {
+        REQUIRE(value == "test");
+        return std::vector({'1', '2'});
+    };
+
+    auto map_good = return_non_pod_res().map<std::vector<int>>(lambda);
+    REQUIRE(map_good.is_ok());
+    REQUIRE(map_good.unwrap() == std::vector({3, 4, 5}));
+    REQUIRE(map_good.value() != nullptr);
+    REQUIRE(*(map_good.value()) == std::vector({3, 4, 5}));
+    REQUIRE(map_good.error() == nullptr);
+
+    auto new_map_good = map_good.map_err<std::vector<char>>(lambda_err);
+    REQUIRE(new_map_good.is_ok());
+    REQUIRE(new_map_good.unwrap() == std::vector({3, 4, 5}));
+    REQUIRE(new_map_good.value() != nullptr);
+    REQUIRE(*(new_map_good.value()) == std::vector({3, 4, 5}));
+    REQUIRE(new_map_good.error() == nullptr);
+
+    auto map_error = decltype(return_non_pod_res())::error("test").map<std::vector<int>>(lambda);
+    REQUIRE(map_error.is_err());
+    REQUIRE(map_error.value() == nullptr);
+    REQUIRE(map_error.error() != nullptr);
+    REQUIRE(map_error.unwrap_err() == "test");
+    REQUIRE(*(map_error.error()) == "test");
+
+    auto new_map_error = map_error.map_err<std::vector<char>>(lambda_err);
+    REQUIRE(new_map_error.is_err());
+    REQUIRE(new_map_error.value() == nullptr);
+    REQUIRE(new_map_error.error() != nullptr);
+    REQUIRE(new_map_error.unwrap_err() == std::vector<char>({'1', '2'}));
+    REQUIRE(*(new_map_error.error()) == std::vector<char>({'1', '2'}));
+
+}

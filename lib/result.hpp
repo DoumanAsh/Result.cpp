@@ -72,6 +72,9 @@ class Result {
 
     //Default methods to ensure proper work with non-POD
     public:
+        using Ok = Value;
+        using Err = Error;
+
         Result() = delete;
 
         ///Creates Ok variant.
@@ -257,6 +260,41 @@ class Result {
             return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
         }
 
+        template<class T>
+        using map_fn_tp = T(Value);
+
+        ///Maps OK value of Result into different value/type.
+        ///
+        ///@returns New result.
+        template<class T>
+        constexpr Result<T, Error> map(map_fn_tp<T>* fn) {
+            if (is_err()) {
+                auto error = std::move(this->store.error);
+                return Result<T, Error>::error(error);
+            }
+            else {
+                auto value = std::move(this->store.ok);
+                return Result<T, Error>::ok(fn(value));
+            }
+        }
+
+        template<class T>
+        using map_err_fn_tp = T(Error);
+
+        ///Maps Err error of Result into different value/type.
+        ///
+        ///@returns New result.
+        template<class E>
+        constexpr Result<Value, E> map_err(map_err_fn_tp<E>* fn) {
+            if (is_ok()) {
+                auto ok = std::move(this->store.ok);
+                return Result<Value, E>::ok(ok);
+            }
+            else {
+                auto error = std::move(this->store.error);
+                return Result<Value, E>::error(fn(error));
+            }
+        }
 }; //Result
 
 } // namespace result
