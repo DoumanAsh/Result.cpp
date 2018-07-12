@@ -24,8 +24,11 @@ matrix:
               packages:
                 - clang-5.0
                 - libstdc++-7-dev
+                - doxygen
+                - doxygen-doc
           env:
             - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+            - DEPLOY_DOX="1"
 
 
 
@@ -38,3 +41,21 @@ script:
     - cmake ../ -DUNIT_TEST=On
     - cmake --build .
     - ctest --output-on-failure
+    - cd ../
+
+after_success:
+  - |
+    if [[ $DEPLOY_DOX == "1" && $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
+        doxygen Doxyfile
+    fi
+
+deploy:
+    provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: true
+    committer-from-gh: true
+    local-dir: html/
+    on:
+        branch: master
+        condition: $DEPLOY_DOX = 1
