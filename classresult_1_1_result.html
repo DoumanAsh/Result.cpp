@@ -110,16 +110,6 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a8ba41d63e5b74a75b6fb18d38b041cff">Err</a> = Error</td></tr>
 <tr class="memdesc:a8ba41d63e5b74a75b6fb18d38b041cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error type. <br/></td></tr>
 <tr class="separator:a8ba41d63e5b74a75b6fb18d38b041cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04bf83d7f68db0216080ecd1c10c0529"><td class="memTemplParams" colspan="2"><a class="anchor" id="a04bf83d7f68db0216080ecd1c10c0529"></a>
-template&lt;class T &gt; </td></tr>
-<tr class="memitem:a04bf83d7f68db0216080ecd1c10c0529"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a04bf83d7f68db0216080ecd1c10c0529">map_fn_tp</a> = T(Value)</td></tr>
-<tr class="memdesc:a04bf83d7f68db0216080ecd1c10c0529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes <a class="el" href="classresult_1_1_result.html#a75ce96506ea0b0782643f498a67f51d4">map</a> argument. <br/></td></tr>
-<tr class="separator:a04bf83d7f68db0216080ecd1c10c0529"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a5b2fa6f361a8458d0870da47e9e217"><td class="memTemplParams" colspan="2"><a class="anchor" id="a2a5b2fa6f361a8458d0870da47e9e217"></a>
-template&lt;class T &gt; </td></tr>
-<tr class="memitem:a2a5b2fa6f361a8458d0870da47e9e217"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a2a5b2fa6f361a8458d0870da47e9e217">map_err_fn_tp</a> = T(Error)</td></tr>
-<tr class="memdesc:a2a5b2fa6f361a8458d0870da47e9e217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes <a class="el" href="classresult_1_1_result.html#a909965783565105748e8eda93b7ef207">map_err</a> argument. <br/></td></tr>
-<tr class="separator:a2a5b2fa6f361a8458d0870da47e9e217"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -186,14 +176,14 @@ constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr class="memitem:ac0be06032f66197cde42ecd47c334b0a"><td class="memItemLeft" align="right" valign="top">constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ac0be06032f66197cde42ecd47c334b0a">unwrap_or</a> (Value &amp;&amp;other)&amp;&amp;</td></tr>
 <tr class="memdesc:ac0be06032f66197cde42ecd47c334b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.  <a href="#ac0be06032f66197cde42ecd47c334b0a">More...</a><br/></td></tr>
 <tr class="separator:ac0be06032f66197cde42ecd47c334b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75ce96506ea0b0782643f498a67f51d4"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a75ce96506ea0b0782643f498a67f51d4"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; T, Error &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a75ce96506ea0b0782643f498a67f51d4">map</a> (<a class="el" href="classresult_1_1_result.html#a04bf83d7f68db0216080ecd1c10c0529">map_fn_tp</a>&lt; T &gt; *fn)</td></tr>
-<tr class="memdesc:a75ce96506ea0b0782643f498a67f51d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps OK value of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a75ce96506ea0b0782643f498a67f51d4">More...</a><br/></td></tr>
-<tr class="separator:a75ce96506ea0b0782643f498a67f51d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a909965783565105748e8eda93b7ef207"><td class="memTemplParams" colspan="2">template&lt;class E &gt; </td></tr>
-<tr class="memitem:a909965783565105748e8eda93b7ef207"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; Value, E &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a909965783565105748e8eda93b7ef207">map_err</a> (<a class="el" href="classresult_1_1_result.html#a2a5b2fa6f361a8458d0870da47e9e217">map_err_fn_tp</a>&lt; E &gt; *fn)</td></tr>
-<tr class="memdesc:a909965783565105748e8eda93b7ef207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps Err error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a909965783565105748e8eda93b7ef207">More...</a><br/></td></tr>
-<tr class="separator:a909965783565105748e8eda93b7ef207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3ee9dceea2e734d08ee6907b1aa591f"><td class="memTemplParams" colspan="2">template&lt;typename Fn , typename NewValue  = std::invoke_result_t&lt;Fn, Value&gt;&gt; </td></tr>
+<tr class="memitem:af3ee9dceea2e734d08ee6907b1aa591f"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; NewValue, Error &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#af3ee9dceea2e734d08ee6907b1aa591f">map</a> (Fn fn)</td></tr>
+<tr class="memdesc:af3ee9dceea2e734d08ee6907b1aa591f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps OK value of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#af3ee9dceea2e734d08ee6907b1aa591f">More...</a><br/></td></tr>
+<tr class="separator:af3ee9dceea2e734d08ee6907b1aa591f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d99b03f01ef9d2656dc261730d95d0"><td class="memTemplParams" colspan="2">template&lt;typename Fn , typename NewError  = std::invoke_result_t&lt;Fn, Error&gt;&gt; </td></tr>
+<tr class="memitem:a18d99b03f01ef9d2656dc261730d95d0"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; Value, NewError &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a18d99b03f01ef9d2656dc261730d95d0">map_err</a> (Fn fn)</td></tr>
+<tr class="memdesc:a18d99b03f01ef9d2656dc261730d95d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps Err error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a18d99b03f01ef9d2656dc261730d95d0">More...</a><br/></td></tr>
+<tr class="separator:a18d99b03f01ef9d2656dc261730d95d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -353,21 +343,21 @@ template&lt;class Value, class Error&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a75ce96506ea0b0782643f498a67f51d4"></a>
+<a class="anchor" id="af3ee9dceea2e734d08ee6907b1aa591f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Value, class Error&gt; </div>
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;typename Fn , typename NewValue  = std::invoke_result_t&lt;Fn, Value&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt;T, Error&gt; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::map </td>
+          <td class="memname">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt;NewValue, Error&gt; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::map </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classresult_1_1_result.html#a04bf83d7f68db0216080ecd1c10c0529">map_fn_tp</a>&lt; T &gt; *&#160;</td>
+          <td class="paramtype">Fn&#160;</td>
           <td class="paramname"><em>fn</em></td><td>)</td>
           <td></td>
         </tr>
@@ -384,21 +374,21 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a909965783565105748e8eda93b7ef207"></a>
+<a class="anchor" id="a18d99b03f01ef9d2656dc261730d95d0"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Value, class Error&gt; </div>
 <div class="memtemplate">
-template&lt;class E &gt; </div>
+template&lt;typename Fn , typename NewError  = std::invoke_result_t&lt;Fn, Error&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt;Value, E&gt; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::map_err </td>
+          <td class="memname">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt;Value, NewError&gt; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::map_err </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classresult_1_1_result.html#a2a5b2fa6f361a8458d0870da47e9e217">map_err_fn_tp</a>&lt; E &gt; *&#160;</td>
+          <td class="paramtype">Fn&#160;</td>
           <td class="paramname"><em>fn</em></td><td>)</td>
           <td></td>
         </tr>
