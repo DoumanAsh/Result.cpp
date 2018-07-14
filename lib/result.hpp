@@ -281,8 +281,8 @@ class Result {
 
         ///Maps OK value of Result into different value/type.
         ///
-        //@note Moves Error out of old Result
-        //
+        ///@note Moves underlying storage out of old Result
+        ///
         ///@returns New result.
         template<typename Fn, typename NewValue = std::invoke_result_t<Fn, Value>>
         constexpr Result<NewValue, Error> map(Fn fn) {
@@ -300,8 +300,8 @@ class Result {
 
         ///Maps Err error of Result into different value/type.
         ///
-        //@note Moves Value out of old Result
-        //
+        ///@note Moves underlying storage out of old Result
+        ///
         ///@returns New result.
         template<typename Fn, typename NewError = std::invoke_result_t<Fn, Error>>
         constexpr Result<Value, NewError> map_err(Fn fn) {
