@@ -283,7 +283,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        }</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="comment">//@note Moves Error out of old Result</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="comment">//@note Moves underlying storage out of old Result</span></div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="comment">//</span></div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"></span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Fn, <span class="keyword">typename</span> NewValue = std::invoke_result_t&lt;Fn, Value&gt;&gt;</div>
 <div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="classresult_1_1_result.html#af3ee9dceea2e734d08ee6907b1aa591f">  288</a></span>&#160;        constexpr <a class="code" href="classresult_1_1_result.html">Result&lt;NewValue, Error&gt;</a> <a class="code" href="classresult_1_1_result.html#af3ee9dceea2e734d08ee6907b1aa591f">map</a>(Fn fn) {</div>
@@ -299,7 +299,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            }</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        }</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="comment">//@note Moves Value out of old Result</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="comment">//@note Moves underlying storage out of old Result</span></div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="comment">//</span></div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Fn, <span class="keyword">typename</span> NewError = std::invoke_result_t&lt;Fn, Error&gt;&gt;</div>
 <div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="classresult_1_1_result.html#a18d99b03f01ef9d2656dc261730d95d0">  307</a></span>&#160;        constexpr <a class="code" href="classresult_1_1_result.html">Result&lt;Value, NewError&gt;</a> <a class="code" href="classresult_1_1_result.html#a18d99b03f01ef9d2656dc261730d95d0">map_err</a>(Fn fn) {</div>
