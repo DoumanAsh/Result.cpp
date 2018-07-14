@@ -49,6 +49,9 @@ template<class Value, class Error>
 class Result {
     //It might be a bad idea to allow Value and Error to be the same
     //but for now lets leave it as it is.
+    static_assert(!std::is_void<Value>::value, "Result Value cannot be void");
+    static_assert(!std::is_void<Error>::value, "Result Error cannot be void");
+
     private:
         union storage {
             Value ok;
@@ -276,41 +279,41 @@ class Result {
             return result;
         }
 
-        ///Describes @ref map argument
-        template<class T>
-        using map_fn_tp = T(Value);
-
         ///Maps OK value of Result into different value/type.
         ///
+        //@note Moves Error out of old Result
+        //
         ///@returns New result.
-        template<class T>
-        constexpr Result<T, Error> map(map_fn_tp<T>* fn) {
+        template<typename Fn, typename NewValue = std::invoke_result_t<Fn, Value>>
+        constexpr Result<NewValue, Error> map(Fn fn) {
+            static_assert(std::is_invocable<Fn, Value>::value, "Fn must be callable and accept Value as argument");
+
             if (is_err()) {
                 auto error = std::move(this->store.error);
-                return Result<T, Error>::error(error);
+                return Result<NewValue, Error>::error(error);
             }
             else {
                 auto value = std::move(this->store.ok);
-                return Result<T, Error>::ok(fn(value));
+                return Result<NewValue, Error>::ok(fn(value));
             }
         }
 
-        ///Describes @ref map_err argument
-        template<class T>
-        using map_err_fn_tp = T(Error);
-
         ///Maps Err error of Result into different value/type.
         ///
+        //@note Moves Value out of old Result
+        //
         ///@returns New result.
-        template<class E>
-        constexpr Result<Value, E> map_err(map_err_fn_tp<E>* fn) {
+        template<typename Fn, typename NewError = std::invoke_result_t<Fn, Error>>
+        constexpr Result<Value, NewError> map_err(Fn fn) {
+            static_assert(std::is_invocable<Fn, Error>::value, "Fn must be callable and accept Error as argument");
+
             if (is_ok()) {
                 auto ok = std::move(this->store.ok);
-                return Result<Value, E>::ok(ok);
+                return Result<Value, NewError>::ok(ok);
             }
             else {
                 auto error = std::move(this->store.error);
-                return Result<Value, E>::error(fn(error));
+                return Result<Value, NewError>::error(fn(error));
             }
         }
 }; //Result
