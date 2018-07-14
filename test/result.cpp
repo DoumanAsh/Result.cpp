@@ -7,6 +7,61 @@
 
 #include <result.hpp>
 
+TEST_CASE("try unwraps") {
+    auto ok = result::Result<int, std::string>::ok(1);
+    auto error = result::Result<int, std::string>::error("lolka");
+    const auto const_ok = result::Result<int, std::string>::ok(1);
+    const auto const_error = result::Result<int, std::string>::error("lolka");
+
+    auto ok_value = ok.unwrap();
+    auto const_ok_value = const_ok.unwrap();
+    auto error_err = error.unwrap_err();
+    auto const_error_err = const_error.unwrap_err();
+
+    REQUIRE(ok_value == 1);
+    REQUIRE(const_ok_value == 1);
+    REQUIRE(error_err == "lolka");
+    REQUIRE(const_error_err == "lolka");
+
+    auto moved_ok = std::move(ok).unwrap();
+    auto moved_err = std::move(error).unwrap_err();
+
+    REQUIRE(moved_ok == 1);
+    REQUIRE(moved_err == "lolka");
+
+    ok = result::Result<int, std::string>::ok(1);
+    error = result::Result<int, std::string>::error("lolka");
+
+    ok_value = ok.unwrap();
+    error_err = error.unwrap_err();
+
+    REQUIRE(ok_value == 1);
+    REQUIRE(error_err == "lolka");
+}
+
+TEST_CASE("try unwrap_or") {
+    auto ok = result::Result<int, std::string>::ok(1);
+    auto error = result::Result<int, std::string>::error("lolka");
+    const auto const_ok = result::Result<int, std::string>::ok(1);
+    const auto const_error = result::Result<int, std::string>::error("lolka");
+
+    auto ok_value = ok.unwrap_or(2);
+    auto const_ok_value = const_ok.unwrap_or(2);
+    auto error_err = error.unwrap_or(0);
+    auto const_error_err = const_error.unwrap_or(0);
+
+    REQUIRE(ok_value == 1);
+    REQUIRE(const_ok_value == 1);
+    REQUIRE(error_err == 0);
+    REQUIRE(const_error_err == 0);
+
+    auto moved_ok = std::move(ok).unwrap_or(2);
+    auto moved_err = std::move(error).unwrap_or(0);
+
+    REQUIRE(moved_ok == 1);
+    REQUIRE(moved_err == 0);
+}
+
 TEST_CASE("try result with pod") {
     const auto ok = result::Result<int, std::string>::ok(1);
     const auto error = result::Result<int, std::string>::error("lolka");

@@ -74,7 +74,7 @@ class Result {
             ~storage() noexcept {}
         };
 
-        enum class type {
+        enum class type: unsigned char {
             ok,
             error
         };
@@ -97,17 +97,18 @@ class Result {
         ///Error type
         using Err = Error;
 
+        ///Default constructor is not allowed.
         Result() = delete;
 
         ///Creates Ok variant.
         template<class... T>
-        static decltype(auto) ok(T&&... value) noexcept {
+        static decltype(auto) ok(T&&... value) noexcept(storage::is_value_noexcept) {
             return Result<Value, Error>(type::ok, internal::storage_ok, std::forward<T>(value)...);
         }
 
         ///Creates Error variant.
         template<class... E>
-        static decltype(auto) error(E&&... error) noexcept {
+        static decltype(auto) error(E&&... error) noexcept(storage::is_error_noexcept) {
             return Result<Value, Error>(type::error, internal::storage_error, std::forward<E>(error)...);
         }
 
@@ -144,7 +145,7 @@ class Result {
 
             if (right.variant != variant) {
                 //Since different type we should clean up old value.
-                ~Result();
+                this->~Result();
                 variant = right.variant;
             }
 
@@ -217,19 +218,15 @@ class Result {
         }
         ///Attempts to unwrap result, yielding content of Ok.
         ///
+        ///@note Moves out Ok's value
+        ///
         ///@throws Content of Error.
-        constexpr Value&& unwrap() && {
+        constexpr Value unwrap() && {
             if (is_ok()) {
-                return store.ok;
+                return std::move(store.ok);
             } else {
                 throw store.error;
             }
-        }
-        ///Attempts to unwrap result, yielding content of Ok.
-        ///
-        ///@throws Content of Error.
-        constexpr const Value&& unwrap() const && {
-            return const_cast<Result*>(this)->unwrap();
         }
 
         ///Attempts to unwrap result, yielding content of Err.
@@ -250,36 +247,33 @@ class Result {
         }
         ///Attempts to unwrap result, yielding content of Err.
         ///
+        ///@note Moves out Error's value
+        ///
         ///@throws If no error.
-        constexpr Error& unwrap_err() && {
+        constexpr Error unwrap_err() && {
             if (is_err()) {
-                return store.error;
+                return std::move(store.error);
             } else {
                 throw "Surprisingly no error...";
             }
         }
-        ///Attempts to unwrap result, yielding content of Err.
-        ///
-        ///@throws Content of Error.
-        constexpr const Error& unwrap_err() const && {
-            return const_cast<Result*>(this)->unwrap_err();
-        }
 
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
-        constexpr Value&& unwrap_or(Value&& other) & {
-            return is_ok() ? std::move(store.ok) : std::move(other);
+        constexpr Value unwrap_or(Value&& other) & {
+            Value result = is_ok() ? store.ok : std::move(other);
+            return result;
         }
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
-        constexpr const Value&& unwrap_or(Value&& other) const & {
-            return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
+        constexpr Value unwrap_or(Value&& other) const & {
+            Value result = is_ok() ? store.ok : std::move(other);
+            return result;
         }
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
-        constexpr Value&& unwrap_or(Value&& other) && {
-            return is_ok() ? std::move(store.ok) : std::move(other);
-        }
-        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
-        constexpr const Value&& unwrap_or(Value&& other) const && {
-            return const_cast<Result*>(this)->unwrap_or(std::forward<Value>(other));
+        ///
+        ///@note Moves out Ok's value
+        constexpr Value unwrap_or(Value&& other) && {
+            Value result = std::move(is_ok() ? store.ok : other);
+            return result;
         }
 
         ///Describes @ref map argument
