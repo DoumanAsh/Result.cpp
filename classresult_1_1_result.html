@@ -123,6 +123,10 @@ template&lt;class T &gt; </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a4d27f79240d46e999da8931511560d22"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d27f79240d46e999da8931511560d22"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a4d27f79240d46e999da8931511560d22">Result</a> ()=delete</td></tr>
+<tr class="memdesc:a4d27f79240d46e999da8931511560d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor is not allowed. <br/></td></tr>
+<tr class="separator:a4d27f79240d46e999da8931511560d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abed83b85588aee8e46d851631b7517d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abed83b85588aee8e46d851631b7517d2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#abed83b85588aee8e46d851631b7517d2">~Result</a> () noexcept(is_destructor_noexcept)</td></tr>
 <tr class="memdesc:abed83b85588aee8e46d851631b7517d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor that invokes, if required, underlying storage's destructor. <br/></td></tr>
@@ -159,40 +163,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab00fac9278176af5e65478346ede60f0"><td class="memItemLeft" align="right" valign="top">constexpr const Value &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ab00fac9278176af5e65478346ede60f0">unwrap</a> () const &amp;</td></tr>
 <tr class="memdesc:ab00fac9278176af5e65478346ede60f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding const ref content of Ok.  <a href="#ab00fac9278176af5e65478346ede60f0">More...</a><br/></td></tr>
 <tr class="separator:ab00fac9278176af5e65478346ede60f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e9568b58f7012c16c98be8fc1cee64b"><td class="memItemLeft" align="right" valign="top">constexpr Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a7e9568b58f7012c16c98be8fc1cee64b">unwrap</a> ()&amp;&amp;</td></tr>
-<tr class="memdesc:a7e9568b58f7012c16c98be8fc1cee64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok.  <a href="#a7e9568b58f7012c16c98be8fc1cee64b">More...</a><br/></td></tr>
-<tr class="separator:a7e9568b58f7012c16c98be8fc1cee64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a726698673928571a1cbe16a63139685a"><td class="memItemLeft" align="right" valign="top">constexpr const Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a726698673928571a1cbe16a63139685a">unwrap</a> () const &amp;&amp;</td></tr>
-<tr class="memdesc:a726698673928571a1cbe16a63139685a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok.  <a href="#a726698673928571a1cbe16a63139685a">More...</a><br/></td></tr>
-<tr class="separator:a726698673928571a1cbe16a63139685a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02d9ee8429a79ac4ca528cb827c7d5d2"><td class="memItemLeft" align="right" valign="top">constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a02d9ee8429a79ac4ca528cb827c7d5d2">unwrap</a> ()&amp;&amp;</td></tr>
+<tr class="memdesc:a02d9ee8429a79ac4ca528cb827c7d5d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok.  <a href="#a02d9ee8429a79ac4ca528cb827c7d5d2">More...</a><br/></td></tr>
+<tr class="separator:a02d9ee8429a79ac4ca528cb827c7d5d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c1c334279e141840dcfdad08d7f62ea"><td class="memItemLeft" align="right" valign="top">constexpr Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a2c1c334279e141840dcfdad08d7f62ea">unwrap_err</a> ()&amp;</td></tr>
 <tr class="memdesc:a2c1c334279e141840dcfdad08d7f62ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#a2c1c334279e141840dcfdad08d7f62ea">More...</a><br/></td></tr>
 <tr class="separator:a2c1c334279e141840dcfdad08d7f62ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad635db0f5a648e2d644c831ff5a0a32e"><td class="memItemLeft" align="right" valign="top">constexpr const Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ad635db0f5a648e2d644c831ff5a0a32e">unwrap_err</a> () const &amp;</td></tr>
 <tr class="memdesc:ad635db0f5a648e2d644c831ff5a0a32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#ad635db0f5a648e2d644c831ff5a0a32e">More...</a><br/></td></tr>
 <tr class="separator:ad635db0f5a648e2d644c831ff5a0a32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9ad259239cf6787eea28a516b54c2ac"><td class="memItemLeft" align="right" valign="top">constexpr Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#aa9ad259239cf6787eea28a516b54c2ac">unwrap_err</a> ()&amp;&amp;</td></tr>
-<tr class="memdesc:aa9ad259239cf6787eea28a516b54c2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#aa9ad259239cf6787eea28a516b54c2ac">More...</a><br/></td></tr>
-<tr class="separator:aa9ad259239cf6787eea28a516b54c2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b8d2a228461b22d19743ac6de84a806"><td class="memItemLeft" align="right" valign="top">constexpr const Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a9b8d2a228461b22d19743ac6de84a806">unwrap_err</a> () const &amp;&amp;</td></tr>
-<tr class="memdesc:a9b8d2a228461b22d19743ac6de84a806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#a9b8d2a228461b22d19743ac6de84a806">More...</a><br/></td></tr>
-<tr class="separator:a9b8d2a228461b22d19743ac6de84a806"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f01043041bb3838be2a3d2f68f73d4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f01043041bb3838be2a3d2f68f73d4a"></a>
-constexpr Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a3f01043041bb3838be2a3d2f68f73d4a">unwrap_or</a> (Value &amp;&amp;other)&amp;</td></tr>
-<tr class="memdesc:a3f01043041bb3838be2a3d2f68f73d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br/></td></tr>
-<tr class="separator:a3f01043041bb3838be2a3d2f68f73d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e111d28742d4bf7a312df7fa4a400c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e111d28742d4bf7a312df7fa4a400c7"></a>
-constexpr const Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a7e111d28742d4bf7a312df7fa4a400c7">unwrap_or</a> (Value &amp;&amp;other) const &amp;</td></tr>
-<tr class="memdesc:a7e111d28742d4bf7a312df7fa4a400c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br/></td></tr>
-<tr class="separator:a7e111d28742d4bf7a312df7fa4a400c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5463ac7979c03e1217830a44f997cd22"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5463ac7979c03e1217830a44f997cd22"></a>
-constexpr Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a5463ac7979c03e1217830a44f997cd22">unwrap_or</a> (Value &amp;&amp;other)&amp;&amp;</td></tr>
-<tr class="memdesc:a5463ac7979c03e1217830a44f997cd22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br/></td></tr>
-<tr class="separator:a5463ac7979c03e1217830a44f997cd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e0294d8f33377c422bd0229840f321b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e0294d8f33377c422bd0229840f321b"></a>
-constexpr const Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a7e0294d8f33377c422bd0229840f321b">unwrap_or</a> (Value &amp;&amp;other) const &amp;&amp;</td></tr>
-<tr class="memdesc:a7e0294d8f33377c422bd0229840f321b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br/></td></tr>
-<tr class="separator:a7e0294d8f33377c422bd0229840f321b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae46fd2ea9a719a08631365d01e2c9ec7"><td class="memItemLeft" align="right" valign="top">constexpr Error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ae46fd2ea9a719a08631365d01e2c9ec7">unwrap_err</a> ()&amp;&amp;</td></tr>
+<tr class="memdesc:ae46fd2ea9a719a08631365d01e2c9ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#ae46fd2ea9a719a08631365d01e2c9ec7">More...</a><br/></td></tr>
+<tr class="separator:ae46fd2ea9a719a08631365d01e2c9ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62508539c5f6a24a6ff689ea339ec657"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62508539c5f6a24a6ff689ea339ec657"></a>
+constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a62508539c5f6a24a6ff689ea339ec657">unwrap_or</a> (Value &amp;&amp;other)&amp;</td></tr>
+<tr class="memdesc:a62508539c5f6a24a6ff689ea339ec657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br/></td></tr>
+<tr class="separator:a62508539c5f6a24a6ff689ea339ec657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6816819df64af6b0022084fda6f7c63f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6816819df64af6b0022084fda6f7c63f"></a>
+constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a6816819df64af6b0022084fda6f7c63f">unwrap_or</a> (Value &amp;&amp;other) const &amp;</td></tr>
+<tr class="memdesc:a6816819df64af6b0022084fda6f7c63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. <br/></td></tr>
+<tr class="separator:a6816819df64af6b0022084fda6f7c63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0be06032f66197cde42ecd47c334b0a"><td class="memItemLeft" align="right" valign="top">constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ac0be06032f66197cde42ecd47c334b0a">unwrap_or</a> (Value &amp;&amp;other)&amp;&amp;</td></tr>
+<tr class="memdesc:ac0be06032f66197cde42ecd47c334b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.  <a href="#ac0be06032f66197cde42ecd47c334b0a">More...</a><br/></td></tr>
+<tr class="separator:ac0be06032f66197cde42ecd47c334b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75ce96506ea0b0782643f498a67f51d4"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a75ce96506ea0b0782643f498a67f51d4"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; T, Error &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a75ce96506ea0b0782643f498a67f51d4">map</a> (<a class="el" href="classresult_1_1_result.html#a04bf83d7f68db0216080ecd1c10c0529">map_fn_tp</a>&lt; T &gt; *fn)</td></tr>
 <tr class="memdesc:a75ce96506ea0b0782643f498a67f51d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps OK value of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a75ce96506ea0b0782643f498a67f51d4">More...</a><br/></td></tr>
@@ -204,16 +197,16 @@ constexpr const Value &amp;&amp;&#160;</td><td class="memItemRight" valign="bott
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a299a50c2f86dd11a86afe5bb03b07650"><td class="memTemplParams" colspan="2"><a class="anchor" id="a299a50c2f86dd11a86afe5bb03b07650"></a>
+<tr class="memitem:a67d16d137aff17c571e4e96c8d53e013"><td class="memTemplParams" colspan="2"><a class="anchor" id="a67d16d137aff17c571e4e96c8d53e013"></a>
 template&lt;class... T&gt; </td></tr>
-<tr class="memitem:a299a50c2f86dd11a86afe5bb03b07650"><td class="memTemplItemLeft" align="right" valign="top">static decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a299a50c2f86dd11a86afe5bb03b07650">ok</a> (T &amp;&amp;...<a class="el" href="classresult_1_1_result.html#a6e81c9fdd389685aa8478bcc7c2e5a73">value</a>) noexcept</td></tr>
-<tr class="memdesc:a299a50c2f86dd11a86afe5bb03b07650"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates Ok variant. <br/></td></tr>
-<tr class="separator:a299a50c2f86dd11a86afe5bb03b07650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78fff28155f2759f3d3b15da10e12c7c"><td class="memTemplParams" colspan="2"><a class="anchor" id="a78fff28155f2759f3d3b15da10e12c7c"></a>
+<tr class="memitem:a67d16d137aff17c571e4e96c8d53e013"><td class="memTemplItemLeft" align="right" valign="top">static decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a67d16d137aff17c571e4e96c8d53e013">ok</a> (T &amp;&amp;...<a class="el" href="classresult_1_1_result.html#a6e81c9fdd389685aa8478bcc7c2e5a73">value</a>) noexcept(storage::is_value_noexcept)</td></tr>
+<tr class="memdesc:a67d16d137aff17c571e4e96c8d53e013"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates Ok variant. <br/></td></tr>
+<tr class="separator:a67d16d137aff17c571e4e96c8d53e013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2adb066ab3a65c146b68994350bd0373"><td class="memTemplParams" colspan="2"><a class="anchor" id="a2adb066ab3a65c146b68994350bd0373"></a>
 template&lt;class... E&gt; </td></tr>
-<tr class="memitem:a78fff28155f2759f3d3b15da10e12c7c"><td class="memTemplItemLeft" align="right" valign="top">static decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a78fff28155f2759f3d3b15da10e12c7c">error</a> (E &amp;&amp;...error) noexcept</td></tr>
-<tr class="memdesc:a78fff28155f2759f3d3b15da10e12c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates Error variant. <br/></td></tr>
-<tr class="separator:a78fff28155f2759f3d3b15da10e12c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2adb066ab3a65c146b68994350bd0373"><td class="memTemplItemLeft" align="right" valign="top">static decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a2adb066ab3a65c146b68994350bd0373">error</a> (E &amp;&amp;...error) noexcept(storage::is_error_noexcept)</td></tr>
+<tr class="memdesc:a2adb066ab3a65c146b68994350bd0373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates Error variant. <br/></td></tr>
+<tr class="separator:a2adb066ab3a65c146b68994350bd0373"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Value, class Error&gt;<br/>
@@ -232,7 +225,7 @@ class result::Result&lt; Value, Error &gt;</h3>
 <div class="line">decltype(<span class="keyword">auto</span>) get_something() {</div>
 <div class="line">    <span class="comment">//Do some work.</span></div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="classresult_1_1_result.html#a299a50c2f86dd11a86afe5bb03b07650">result::Result&lt;int, std::string&gt;::ok</a>(1)</div>
+<div class="line">    <a class="code" href="classresult_1_1_result.html#a67d16d137aff17c571e4e96c8d53e013">result::Result&lt;int, std::string&gt;::ok</a>(1)</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
@@ -514,7 +507,7 @@ template&lt;class Value, class Error&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7e9568b58f7012c16c98be8fc1cee64b"></a>
+<a class="anchor" id="a02d9ee8429a79ac4ca528cb827c7d5d2"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -524,7 +517,7 @@ template&lt;class Value, class Error&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr Value&amp;&amp; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap </td>
+          <td class="memname">constexpr Value <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -538,39 +531,7 @@ template&lt;class Value, class Error&gt; </div>
 </div><div class="memdoc">
 
 <p>Attempts to unwrap result, yielding content of Ok. </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">Content</td><td>of Error. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a726698673928571a1cbe16a63139685a"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Value, class Error&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const Value&amp;&amp; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Attempts to unwrap result, yielding content of Ok. </p>
+<dl class="section note"><dt>Note</dt><dd>Moves out Ok's value</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">Content</td><td>of Error. </td></tr>
@@ -646,7 +607,7 @@ template&lt;class Value, class Error&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa9ad259239cf6787eea28a516b54c2ac"></a>
+<a class="anchor" id="ae46fd2ea9a719a08631365d01e2c9ec7"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -656,7 +617,7 @@ template&lt;class Value, class Error&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr Error&amp; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap_err </td>
+          <td class="memname">constexpr Error <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap_err </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -670,6 +631,7 @@ template&lt;class Value, class Error&gt; </div>
 </div><div class="memdoc">
 
 <p>Attempts to unwrap result, yielding content of Err. </p>
+<dl class="section note"><dt>Note</dt><dd>Moves out Error's value</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>no error. </td></tr>
@@ -679,7 +641,7 @@ template&lt;class Value, class Error&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a9b8d2a228461b22d19743ac6de84a806"></a>
+<a class="anchor" id="ac0be06032f66197cde42ecd47c334b0a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -689,10 +651,11 @@ template&lt;class Value, class Error&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const Error&amp; <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap_err </td>
+          <td class="memname">constexpr Value <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap_or </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">Value &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -702,13 +665,8 @@ template&lt;class Value, class Error&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Attempts to unwrap result, yielding content of Err. </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">Content</td><td>of Error. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Attempts to unwrap result, yielding content of Ok or, if it is not ok, other. </p>
+<dl class="section note"><dt>Note</dt><dd>Moves out Ok's value </dd></dl>
 
 </div>
 </div>
