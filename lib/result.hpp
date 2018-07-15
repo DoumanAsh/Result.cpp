@@ -262,11 +262,6 @@ class Result {
         }
 
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
-        constexpr Value unwrap_or(Value&& other) & {
-            Value result = is_ok() ? store.ok : std::move(other);
-            return result;
-        }
-        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         constexpr Value unwrap_or(Value&& other) const & {
             Value result = is_ok() ? store.ok : std::move(other);
             return result;
