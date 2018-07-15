@@ -24,12 +24,9 @@ matrix:
               packages:
                 - clang-5.0
                 - libstdc++-7-dev
-                - doxygen
-                - doxygen-doc
           env:
             - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-            - DEPLOY_DOX="1"
-
+            - DOXYGEN=doxygen-1.8.13
 
 
 before_install:
@@ -45,7 +42,12 @@ script:
 
 after_success:
   - |
-    if [[ $DEPLOY_DOX == "1" && $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
+    if [[ $DOXYGEN && $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
+        DOXYGEN_URL="http://ftp.stack.nl/pub/users/dimitri/${DOXYGEN}.linux.bin.tar.gz"
+
+        wget -O - "${DOXYGEN_URL}" | tar xz -C ${TMPDIR-/tmp} ${DOXYGEN}/bin/doxygen
+        export PATH="${TMPDIR-/tmp}/${DOXYGEN}/bin:$PATH"
+
         doxygen Doxyfile
     fi
 
@@ -58,4 +60,4 @@ deploy:
     local-dir: html/
     on:
         branch: master
-        condition: $DEPLOY_DOX = 1
+        condition: $DOXYGEN
