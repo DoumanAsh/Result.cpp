@@ -15,6 +15,10 @@ namespace internal {
     constexpr storage_error_t storage_error;
     constexpr storage_empty_t storage_empty;
 }
+
+//Forward declare itself for Result.
+template<typename T>
+struct is_result;
 #endif
 
 /**
@@ -312,5 +316,32 @@ class Result {
             }
         }
 }; //Result
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+namespace internal {
+    template<typename T>
+    struct is_result: std::false_type {};
+
+    template<typename T, typename E>
+    struct is_result<Result<T, E>> : std::true_type {};
+}
+#endif
+
+/**
+ * Determines whether type is Result.
+ *
+ * The result is stored in `value` member of [std::integral_constant](https://en.cppreference.com/w/cpp/types/integral_constant)
+ *
+ * ## Example
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~
+ * int main() {
+       static_assert(!result::is_result<int>::value);
+       static_assert(result::is_result<result::Result<int, std::string>>::value);
+ * }
+ * ~~~~~~~~~~~~~~~~~~~~~
+ */
+template<typename T>
+struct is_result: std::integral_constant<bool, internal::is_result<T>::value> {};
 
 } // namespace result

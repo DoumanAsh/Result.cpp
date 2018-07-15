@@ -7,6 +7,13 @@
 
 #include <result.hpp>
 
+TEST_CASE("try is_result") {
+    static_assert(!result::is_result<int>::value);
+    static_assert(result::is_result<result::Result<int, std::string>>::value);
+    REQUIRE(result::is_result<int>::value == false);
+    REQUIRE(result::is_result<result::Result<int, std::string>>::value == true);
+}
+
 TEST_CASE("try unwraps") {
     auto ok = result::Result<int, std::string>::ok(1);
     auto error = result::Result<int, std::string>::error("lolka");
