@@ -18,7 +18,7 @@ You can just take header `lib/result.hpp` and place it into your project
 decltype(auto) get_something() {
     //Do some work.
 
-    result::Result<int, std::string>::ok(1)
+    return result::Result<int, std::string>::ok(1);
 }
 
 int main() {
