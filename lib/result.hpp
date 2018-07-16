@@ -57,6 +57,10 @@ class Result {
     static_assert(!std::is_void<Error>::value, "Result Error cannot be void");
 
     private:
+        static constexpr bool is_value_trivially_destructible = std::is_trivially_destructible<Value>::value;
+        static constexpr bool is_error_trivially_destructible = std::is_trivially_destructible<Error>::value;
+        static constexpr bool is_trivially_destructible = is_value_trivially_destructible && is_error_trivially_destructible;
+
         union storage {
             Value ok;
             Error error;
@@ -97,7 +101,6 @@ class Result {
         template<class... A>
         explicit Result(type variant, A&&... value) noexcept(is_constructor_noexcept) : variant(variant), store(std::forward<A>(value)...) {}
 
-    //Default methods to ensure proper work with non-POD
     public:
         ///OK type
         using Ok = Value;
@@ -121,13 +124,13 @@ class Result {
 
         ///Destructor that invokes, if required, underlying storage's destructor.
         ~Result() noexcept(is_destructor_noexcept) {
-            if constexpr (std::is_destructible<Value>::value) {
+            if constexpr (!is_value_trivially_destructible && std::is_destructible<Value>::value) {
                 if (variant == type::ok) {
                     store.ok.~Value();
                 }
             }
 
-            if constexpr (std::is_destructible<Error>::value) {
+            if constexpr (!is_error_trivially_destructible && std::is_destructible<Error>::value) {
                 if (variant == type::error) {
                     store.error.~Error();
                 }
