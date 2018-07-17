@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['result',['Result',['../classresult_1_1_result.html',1,'result']]]
+  ['is_5fresult',['is_result',['../structresult_1_1is__result.html',1,'result']]]
 ];

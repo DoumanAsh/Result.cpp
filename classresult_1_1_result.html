@@ -103,6 +103,22 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#acbdb80cba766eb0a8053468eee6907c8">Result</a> (<a class="el" href="classresult_1_1_result.html">Result</a> &amp;&amp;right) noexcept(is_move_const_noexcept)</td></tr>
 <tr class="memdesc:acbdb80cba766eb0a8053468eee6907c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor. <br /></td></tr>
 <tr class="separator:acbdb80cba766eb0a8053468eee6907c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40a3c2da464d2145f1d56ebc2a23524"><td class="memItemLeft" align="right" valign="top"><a id="aa40a3c2da464d2145f1d56ebc2a23524"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#aa40a3c2da464d2145f1d56ebc2a23524">Result</a> (const result::Ok&lt; Value &gt; &amp;right) noexcept(std::is_nothrow_copy_constructible&lt; Value &gt;::<a class="el" href="classresult_1_1_result.html#a6e81c9fdd389685aa8478bcc7c2e5a73">value</a>)</td></tr>
+<tr class="memdesc:aa40a3c2da464d2145f1d56ebc2a23524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializer from Ok. <br /></td></tr>
+<tr class="separator:aa40a3c2da464d2145f1d56ebc2a23524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b2f7df1d9b7525b94747ecf81d54f2"><td class="memItemLeft" align="right" valign="top"><a id="ae0b2f7df1d9b7525b94747ecf81d54f2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ae0b2f7df1d9b7525b94747ecf81d54f2">Result</a> (result::Ok&lt; Value &gt; &amp;&amp;right) noexcept(std::is_nothrow_move_constructible&lt; Value &gt;::<a class="el" href="classresult_1_1_result.html#a6e81c9fdd389685aa8478bcc7c2e5a73">value</a>)</td></tr>
+<tr class="memdesc:ae0b2f7df1d9b7525b94747ecf81d54f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializer from Ok. <br /></td></tr>
+<tr class="separator:ae0b2f7df1d9b7525b94747ecf81d54f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01dc719f539a68b8dd17af3e52a2c36a"><td class="memItemLeft" align="right" valign="top"><a id="a01dc719f539a68b8dd17af3e52a2c36a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a01dc719f539a68b8dd17af3e52a2c36a">Result</a> (const <a class="el" href="classresult_1_1_err.html">result::Err</a>&lt; Error &gt; &amp;right) noexcept(std::is_nothrow_copy_constructible&lt; Error &gt;::<a class="el" href="classresult_1_1_result.html#a6e81c9fdd389685aa8478bcc7c2e5a73">value</a>)</td></tr>
+<tr class="memdesc:a01dc719f539a68b8dd17af3e52a2c36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializer from <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>. <br /></td></tr>
+<tr class="separator:a01dc719f539a68b8dd17af3e52a2c36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261af2fcf7f70be4f609e0c619fdc802"><td class="memItemLeft" align="right" valign="top"><a id="a261af2fcf7f70be4f609e0c619fdc802"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a261af2fcf7f70be4f609e0c619fdc802">Result</a> (<a class="el" href="classresult_1_1_err.html">result::Err</a>&lt; Error &gt; &amp;&amp;right) noexcept(std::is_nothrow_move_constructible&lt; Error &gt;::<a class="el" href="classresult_1_1_result.html#a6e81c9fdd389685aa8478bcc7c2e5a73">value</a>)</td></tr>
+<tr class="memdesc:a261af2fcf7f70be4f609e0c619fdc802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializer from <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>. <br /></td></tr>
+<tr class="separator:a261af2fcf7f70be4f609e0c619fdc802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f4b0341648ec4592a73f2bdfbce3291"><td class="memItemLeft" align="right" valign="top"><a id="a6f4b0341648ec4592a73f2bdfbce3291"></a>
 <a class="el" href="classresult_1_1_result.html">Result</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a6f4b0341648ec4592a73f2bdfbce3291">operator=</a> (<a class="el" href="classresult_1_1_result.html">Result</a> &amp;&amp;right) noexcept(is_move_assignment_noexcept)</td></tr>
 <tr class="memdesc:a6f4b0341648ec4592a73f2bdfbce3291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment. <br /></td></tr>
@@ -135,13 +151,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a138b87fa34c418fa60f69df38b9dad40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Ok.  <a href="#a138b87fa34c418fa60f69df38b9dad40">More...</a><br /></td></tr>
 <tr class="separator:a138b87fa34c418fa60f69df38b9dad40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39f367629d82321361b7b9574d5365f3"><td class="memItemLeft" align="right" valign="top">constexpr Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a39f367629d82321361b7b9574d5365f3">unwrap_err</a> () &amp;</td></tr>
-<tr class="memdesc:a39f367629d82321361b7b9574d5365f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#a39f367629d82321361b7b9574d5365f3">More...</a><br /></td></tr>
+<tr class="memdesc:a39f367629d82321361b7b9574d5365f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>.  <a href="#a39f367629d82321361b7b9574d5365f3">More...</a><br /></td></tr>
 <tr class="separator:a39f367629d82321361b7b9574d5365f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad635db0f5a648e2d644c831ff5a0a32e"><td class="memItemLeft" align="right" valign="top">constexpr const Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ad635db0f5a648e2d644c831ff5a0a32e">unwrap_err</a> () const &amp;</td></tr>
-<tr class="memdesc:ad635db0f5a648e2d644c831ff5a0a32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#ad635db0f5a648e2d644c831ff5a0a32e">More...</a><br /></td></tr>
+<tr class="memdesc:ad635db0f5a648e2d644c831ff5a0a32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>.  <a href="#ad635db0f5a648e2d644c831ff5a0a32e">More...</a><br /></td></tr>
 <tr class="separator:ad635db0f5a648e2d644c831ff5a0a32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18e822ede2683875e4faaa0d52c52b0b"><td class="memItemLeft" align="right" valign="top">constexpr Error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a18e822ede2683875e4faaa0d52c52b0b">unwrap_err</a> () &amp;&amp;</td></tr>
-<tr class="memdesc:a18e822ede2683875e4faaa0d52c52b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of Err.  <a href="#a18e822ede2683875e4faaa0d52c52b0b">More...</a><br /></td></tr>
+<tr class="memdesc:a18e822ede2683875e4faaa0d52c52b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>.  <a href="#a18e822ede2683875e4faaa0d52c52b0b">More...</a><br /></td></tr>
 <tr class="separator:a18e822ede2683875e4faaa0d52c52b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6816819df64af6b0022084fda6f7c63f"><td class="memItemLeft" align="right" valign="top"><a id="a6816819df64af6b0022084fda6f7c63f"></a>
 constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a6816819df64af6b0022084fda6f7c63f">unwrap_or</a> (Value &amp;&amp;other) const &amp;</td></tr>
@@ -156,7 +172,7 @@ constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr class="separator:af3ee9dceea2e734d08ee6907b1aa591f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18d99b03f01ef9d2656dc261730d95d0"><td class="memTemplParams" colspan="2">template&lt;typename Fn , typename NewError  = std::invoke_result_t&lt;Fn, Error&gt;&gt; </td></tr>
 <tr class="memitem:a18d99b03f01ef9d2656dc261730d95d0"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; Value, NewError &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a18d99b03f01ef9d2656dc261730d95d0">map_err</a> (Fn fn)</td></tr>
-<tr class="memdesc:a18d99b03f01ef9d2656dc261730d95d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps Err error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a18d99b03f01ef9d2656dc261730d95d0">More...</a><br /></td></tr>
+<tr class="memdesc:a18d99b03f01ef9d2656dc261730d95d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a> error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a18d99b03f01ef9d2656dc261730d95d0">More...</a><br /></td></tr>
 <tr class="separator:a18d99b03f01ef9d2656dc261730d95d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -372,7 +388,7 @@ template&lt;typename Fn , typename NewError  = std::invoke_result_t&lt;Fn, Error
 </table>
 </div><div class="memdoc">
 
-<p>Maps Err error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type. </p>
+<p>Maps <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a> error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type. </p>
 <dl class="section note"><dt>Note</dt><dd>Moves underlying storage out of old <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a></dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>New result. </dd></dl>
 
@@ -537,7 +553,7 @@ template&lt;class Value, class Error&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Attempts to unwrap result, yielding content of Err. </p>
+<p>Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>no error. </td></tr>
@@ -572,7 +588,7 @@ template&lt;class Value, class Error&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Attempts to unwrap result, yielding content of Err. </p>
+<p>Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>no error. </td></tr>
@@ -607,7 +623,7 @@ template&lt;class Value, class Error&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Attempts to unwrap result, yielding content of Err. </p>
+<p>Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_err.html" title="Ok variant shortcut. ">Err</a>. </p>
 <dl class="section note"><dt>Note</dt><dd>Moves out Error's value</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
