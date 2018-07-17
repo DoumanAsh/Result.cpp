@@ -22,6 +22,68 @@ struct is_result;
 #endif
 
 /**
+ * Ok variant shortcut.
+ *
+ * ## Usage
+ *
+ * ~~~~~~~~~~~~~~~
+ * #include "result.hpp"
+ *
+ * int main() {
+ *     result::Result<int, std::string> res = result::Ok(1);
+ *     retrun res.unwrap();
+ * }
+ * ~~~~~~~~~~~~~~~
+ */
+template<class Value>
+class Ok {
+    static_assert(!std::is_void<Value>::value, "Ok Value cannot be void");
+
+    public:
+        ///Ok's content.
+        Value inner;
+
+        ///Default constructor is not allowed.
+        Ok() = delete;
+
+        ///Copy constructor that takes value.
+        Ok(const Value& right) noexcept(std::is_nothrow_copy_constructible<Value>::value) : inner(right) {}
+        ///Move constructor that takes value.
+        Ok(Value&& right) noexcept(std::is_nothrow_move_constructible<Value>::value) : inner(std::move(right)) {}
+};
+
+/**
+ * Error variant shortcut.
+ *
+ * ## Usage
+ *
+ * ~~~~~~~~~~~~~~~
+ * #include "result.hpp"
+ *
+ * int main() {
+ *     result::Result<int, std::string> res = result::Err(std::string("error"));
+ *     retrun res.unwrap_or(1);
+ * }
+ * ~~~~~~~~~~~~~~~
+ */
+template<class Value>
+class Err {
+    static_assert(!std::is_void<Value>::value, "Err Value cannot be void");
+
+    public:
+        ///Ok's content.
+        Value inner;
+
+        ///Default constructor is not allowed.
+        Err() = delete;
+
+        ///Copy constructor that takes value.
+        Err(const Value& right) noexcept(std::is_nothrow_copy_constructible<Value>::value) : inner(right) {}
+        ///Move constructor that takes value.
+        Err(Value&& right) noexcept(std::is_nothrow_move_constructible<Value>::value) : inner(std::move(right)) {}
+};
+
+/**
  * Result type that represents two-possible outcomes:
  *
  * * Value - contains value with result of computation.
@@ -147,6 +209,16 @@ class Result {
                 case type::error: ::new(&store.error) Error(std::move(right.store.error)); break;
             }
         }
+
+        ///Initializer from Ok
+        Result(const result::Ok<Value>& right) noexcept(std::is_nothrow_copy_constructible<Value>::value): variant(type::ok), store(internal::storage_ok, right.inner) { }
+        ///Initializer from Ok
+        Result(result::Ok<Value>&& right) noexcept(std::is_nothrow_move_constructible<Value>::value): variant(type::ok), store(internal::storage_ok, std::move(right.inner)) { }
+
+        ///Initializer from Err
+        Result(const result::Err<Error>& right) noexcept(std::is_nothrow_copy_constructible<Error>::value): variant(type::error), store(internal::storage_error, right.inner) { }
+        ///Initializer from Err
+        Result(result::Err<Error>&& right) noexcept(std::is_nothrow_move_constructible<Error>::value): variant(type::error), store(internal::storage_error, std::move(right.inner)) { }
 
         ///Move assignment
         Result& operator=(Result&& right) noexcept(is_move_assignment_noexcept) {

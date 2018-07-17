@@ -229,3 +229,13 @@ TEST_CASE("try map non-pod type from return") {
     REQUIRE(new_map_error.unwrap_err() == std::vector<char>({'1', '2'}));
     REQUIRE(*(new_map_error.error()) == std::vector<char>({'1', '2'}));
 }
+
+TEST_CASE("try helpers Ok/Err") {
+    result::Result<int, std::string> res_ok = result::Ok(1);
+    result::Result<int, std::string> res_err = result::Err(std::string("lolka"));
+
+    REQUIRE(res_ok.is_ok());
+    REQUIRE(res_ok.unwrap() == 1);
+    REQUIRE(res_err.is_err());
+    REQUIRE(res_err.unwrap_err() == "lolka");
+}
