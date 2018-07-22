@@ -275,3 +275,20 @@ TEST_CASE("try or_else") {
     REQUIRE(new_res_err.is_err());
     REQUIRE(new_res_err.unwrap_err() == 'c');
 }
+
+TEST_CASE("try unwrap_or_default") {
+    const result::Result<int, std::string> res_ok = result::Ok(1);
+    const result::Result<int, std::string> res_err = result::Err(std::string("lolka"));
+
+    auto ok_value = res_ok.unwrap_or_default();
+    auto err_value = res_err.unwrap_or_default();
+
+    REQUIRE(ok_value == 1);
+    REQUIRE(err_value == 0);
+
+    ok_value = std::move(result::Result<int, std::string>::ok(1)).unwrap_or_default();
+    err_value = std::move(result::Result<int, std::string>::error("lolka")).unwrap_or_default();
+
+    REQUIRE(ok_value == 1);
+    REQUIRE(err_value == 0);
+}

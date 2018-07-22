@@ -353,6 +353,19 @@ class Result {
             return result;
         }
 
+        ///Attempts to unwrap result, yielding content of Ok or, default constructed value.
+        ///
+        ///This is only possible if `Value` is trivially copable.
+        constexpr Value unwrap_or_default() const & {
+            return is_ok() ? store.ok : Value();
+        }
+        ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
+        ///
+        ///@note Moves out Ok's value
+        constexpr Value unwrap_or_default() && {
+            return is_ok() ? std::move(store.ok) : Value();
+        }
+
         ///Maps OK value of Result into different value/type.
         ///
         ///@note Moves underlying storage out of old Result
