@@ -174,6 +174,14 @@ constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr class="memitem:a18d99b03f01ef9d2656dc261730d95d0"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; Value, NewError &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a18d99b03f01ef9d2656dc261730d95d0">map_err</a> (Fn fn)</td></tr>
 <tr class="memdesc:a18d99b03f01ef9d2656dc261730d95d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps <a class="el" href="classresult_1_1_err.html" title="Error variant shortcut. ">Err</a> error of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#a18d99b03f01ef9d2656dc261730d95d0">More...</a><br /></td></tr>
 <tr class="separator:a18d99b03f01ef9d2656dc261730d95d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84d9606724120dde34ff9ad8aae33098"><td class="memTemplParams" colspan="2">template&lt;typename Fn , typename NewResult  = std::invoke_result_t&lt;Fn, Value&gt;&gt; </td></tr>
+<tr class="memitem:a84d9606724120dde34ff9ad8aae33098"><td class="memTemplItemLeft" align="right" valign="top">constexpr NewResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a84d9606724120dde34ff9ad8aae33098">and_then</a> (Fn fn)</td></tr>
+<tr class="memdesc:a84d9606724120dde34ff9ad8aae33098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains itself to new <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a>, returned by function with potentially different Value.  <a href="#a84d9606724120dde34ff9ad8aae33098">More...</a><br /></td></tr>
+<tr class="separator:a84d9606724120dde34ff9ad8aae33098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37653aee5e047beb75253c0375a6df6"><td class="memTemplParams" colspan="2">template&lt;typename Fn , typename NewResult  = std::invoke_result_t&lt;Fn, Error&gt;&gt; </td></tr>
+<tr class="memitem:ae37653aee5e047beb75253c0375a6df6"><td class="memTemplItemLeft" align="right" valign="top">constexpr NewResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ae37653aee5e047beb75253c0375a6df6">or_else</a> (Fn fn)</td></tr>
+<tr class="memdesc:ae37653aee5e047beb75253c0375a6df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains itself to new <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a>, returned by function with potentially different Error.  <a href="#ae37653aee5e047beb75253c0375a6df6">More...</a><br /></td></tr>
+<tr class="separator:ae37653aee5e047beb75253c0375a6df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -200,6 +208,46 @@ class result::Result&lt; Value, Error &gt;</h3>
 <h2>Usage</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"></div><div class="line"><span class="preprocessor">#include &quot;result.hpp&quot;</span></div><div class="line"></div><div class="line">decltype(<span class="keyword">auto</span>) get_something() {</div><div class="line">    <span class="comment">//Do some work.</span></div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="classresult_1_1_result.html#a20cfc079199f09c445840c7bde1198d3">result::Result&lt;int, std::string&gt;::ok</a>(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main() {</div><div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code" href="namespaceresult.html">result</a> = get_something();</div><div class="line"></div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Result=&quot;</span> &lt;&lt; <a class="code" href="namespaceresult.html">result</a>.unwrap_or(0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div><div class="line">}</div></div><!-- fragment --><p>The intention is to create similar to Rust <a href="https://doc.rust-lang.org/std/result/enum.Result.html">Result</a> type. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a84d9606724120dde34ff9ad8aae33098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d9606724120dde34ff9ad8aae33098">&#9670;&nbsp;</a></span>and_then()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Value, class Error&gt; </div>
+<div class="memtemplate">
+template&lt;typename Fn , typename NewResult  = std::invoke_result_t&lt;Fn, Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr NewResult <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::and_then </td>
+          <td>(</td>
+          <td class="paramtype">Fn&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chains itself to new <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a>, returned by function with potentially different Value. </p>
+<dl class="section note"><dt>Note</dt><dd>Moves underlying storage out of old <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fn</td><td>Callback to be called when result is <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New result. </dd></dl>
+
+</div>
+</div>
 <a id="a83ae078de150ed2a697719e70c57b37c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83ae078de150ed2a697719e70c57b37c">&#9670;&nbsp;</a></span>error() <span class="overload">[1/2]</span></h2>
 
@@ -419,6 +467,46 @@ template&lt;class Value, class Error&gt; </div>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>true If <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a> value. </dd></dl>
+
+</div>
+</div>
+<a id="ae37653aee5e047beb75253c0375a6df6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae37653aee5e047beb75253c0375a6df6">&#9670;&nbsp;</a></span>or_else()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Value, class Error&gt; </div>
+<div class="memtemplate">
+template&lt;typename Fn , typename NewResult  = std::invoke_result_t&lt;Fn, Error&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr NewResult <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::or_else </td>
+          <td>(</td>
+          <td class="paramtype">Fn&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chains itself to new <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a>, returned by function with potentially different Error. </p>
+<dl class="section note"><dt>Note</dt><dd>Moves underlying storage out of old <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fn</td><td>Callback to be called when result is <a class="el" href="classresult_1_1_err.html" title="Error variant shortcut. ">Err</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New result. </dd></dl>
 
 </div>
 </div>

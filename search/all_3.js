@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['ok',['Ok',['../classresult_1_1_ok.html',1,'result::Ok&lt; Value &gt;'],['../classresult_1_1_result.html#a20cfc079199f09c445840c7bde1198d3',1,'result::Result::ok(T &amp;&amp;... value) noexcept(storage::is_value_noexcept)'],['../classresult_1_1_result.html#a1cc9bba94ca5853e7557d5ec0967d945',1,'result::Result::Ok()'],['../classresult_1_1_ok.html#af4b1a97b29e158fb66d2cf73904820b7',1,'result::Ok::Ok()=delete'],['../classresult_1_1_ok.html#a9a554fc284b67076a281ab8cce7ec0f6',1,'result::Ok::Ok(const Value &amp;right) noexcept(std::is_nothrow_copy_constructible&lt; Value &gt;::value)'],['../classresult_1_1_ok.html#a324fa5f8dfe2b86c9412a68faa45e268',1,'result::Ok::Ok(Value &amp;&amp;right) noexcept(std::is_nothrow_move_constructible&lt; Value &gt;::value)']]],
-  ['operator_20bool',['operator bool',['../classresult_1_1_result.html#ab4349fa16120820b925f3010c371470d',1,'result::Result']]],
-  ['operator_3d',['operator=',['../classresult_1_1_result.html#a6f4b0341648ec4592a73f2bdfbce3291',1,'result::Result']]]
+  ['map',['map',['../classresult_1_1_result.html#af3ee9dceea2e734d08ee6907b1aa591f',1,'result::Result']]],
+  ['map_5ferr',['map_err',['../classresult_1_1_result.html#a18d99b03f01ef9d2656dc261730d95d0',1,'result::Result']]]
 ];
