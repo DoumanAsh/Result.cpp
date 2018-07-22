@@ -239,3 +239,39 @@ TEST_CASE("try helpers Ok/Err") {
     REQUIRE(res_err.is_err());
     REQUIRE(res_err.unwrap_err() == "lolka");
 }
+
+TEST_CASE("try and_then") {
+    decltype(auto) lambda = [](int value) {
+        REQUIRE(value == 1);
+        return result::Result<char, std::string>::ok('c');
+    };
+
+    result::Result<int, std::string> res_ok = result::Ok(1);
+    result::Result<int, std::string> res_err = result::Err(std::string("lolka"));
+
+    auto new_res_ok = res_ok.and_then(lambda);
+    auto new_res_err = res_err.and_then(lambda);
+
+    REQUIRE(new_res_ok.is_ok());
+    REQUIRE(new_res_ok.unwrap() == 'c');
+    REQUIRE(new_res_err.is_err());
+    REQUIRE(new_res_err.unwrap_err() == "lolka");
+}
+
+TEST_CASE("try or_else") {
+    decltype(auto) lambda = [](std::string error) {
+        REQUIRE(error == "lolka");
+        return result::Result<int, char>::error('c');
+    };
+
+    result::Result<int, std::string> res_ok = result::Ok(1);
+    result::Result<int, std::string> res_err = result::Err(std::string("lolka"));
+
+    auto new_res_ok = res_ok.or_else(lambda);
+    auto new_res_err = res_err.or_else(lambda);
+
+    REQUIRE(new_res_ok.is_ok());
+    REQUIRE(new_res_ok.unwrap() == 1);
+    REQUIRE(new_res_err.is_err());
+    REQUIRE(new_res_err.unwrap_err() == 'c');
+}

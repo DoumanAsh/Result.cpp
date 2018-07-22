@@ -365,8 +365,7 @@ class Result {
             if (is_err()) {
                 auto error = std::move(this->store.error);
                 return Result<NewValue, Error>::error(error);
-            }
-            else {
+            } else {
                 auto value = std::move(this->store.ok);
                 return Result<NewValue, Error>::ok(fn(value));
             }
@@ -384,12 +383,56 @@ class Result {
             if (is_ok()) {
                 auto ok = std::move(this->store.ok);
                 return Result<Value, NewError>::ok(ok);
-            }
-            else {
+            } else {
                 auto error = std::move(this->store.error);
                 return Result<Value, NewError>::error(fn(error));
             }
         }
+
+        ///Chains itself to new Result, returned by function with potentially different Value.
+        ///
+        ///@note Moves underlying storage out of old Result
+        ///
+        ///@param fn Callback to be called when result is Ok.
+        ///
+        ///@returns New result.
+        template<typename Fn, typename NewResult = std::invoke_result_t<Fn, Value>>
+        constexpr NewResult and_then(Fn fn) {
+            static_assert(std::is_invocable<Fn, Value>::value, "Fn must be callable and accept Value as argument");
+            static_assert(is_result<NewResult>::value, "Fn must return result");
+            static_assert(std::is_same<typename NewResult::Err, Error>::value, "New Result must have the same Error type");
+
+            if (is_ok()) {
+                auto ok = std::move(this->store.ok);
+                return fn(ok);
+            } else {
+                auto error = std::move(this->store.error);
+                return NewResult::error(error);
+            }
+        }
+
+        ///Chains itself to new Result, returned by function with potentially different Error.
+        ///
+        ///@note Moves underlying storage out of old Result
+        ///
+        ///@param fn Callback to be called when result is Err.
+        ///
+        ///@returns New result.
+        template<typename Fn, typename NewResult = std::invoke_result_t<Fn, Error>>
+        constexpr NewResult or_else(Fn fn) {
+            static_assert(std::is_invocable<Fn, Error>::value, "Fn must be callable and accept Error as argument");
+            static_assert(is_result<NewResult>::value, "Fn must return result");
+            static_assert(std::is_same<typename NewResult::Ok, Value>::value, "New Result must have the same Value type");
+
+            if (is_ok()) {
+                auto ok = std::move(this->store.ok);
+                return NewResult::ok(ok);
+            } else {
+                auto error = std::move(this->store.error);
+                return fn(error);
+            }
+        }
+
 }; //Result
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
