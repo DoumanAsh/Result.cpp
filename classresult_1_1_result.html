@@ -166,6 +166,12 @@ constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr class="memitem:ac9148f8417baec29130494a413e3a690"><td class="memItemLeft" align="right" valign="top">constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#ac9148f8417baec29130494a413e3a690">unwrap_or</a> (Value &amp;&amp;other) &amp;&amp;</td></tr>
 <tr class="memdesc:ac9148f8417baec29130494a413e3a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a> or, if it is not ok, other.  <a href="#ac9148f8417baec29130494a413e3a690">More...</a><br /></td></tr>
 <tr class="separator:ac9148f8417baec29130494a413e3a690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6562ccc40044d1525eb5809588c4185f"><td class="memItemLeft" align="right" valign="top">constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#a6562ccc40044d1525eb5809588c4185f">unwrap_or_default</a> () const &amp;</td></tr>
+<tr class="memdesc:a6562ccc40044d1525eb5809588c4185f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a> or, default constructed value.  <a href="#a6562ccc40044d1525eb5809588c4185f">More...</a><br /></td></tr>
+<tr class="separator:a6562ccc40044d1525eb5809588c4185f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc1218ef75d84b5ca378ba0c676cf9df"><td class="memItemLeft" align="right" valign="top">constexpr Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#acc1218ef75d84b5ca378ba0c676cf9df">unwrap_or_default</a> () &amp;&amp;</td></tr>
+<tr class="memdesc:acc1218ef75d84b5ca378ba0c676cf9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a> or, if it is not ok, other.  <a href="#acc1218ef75d84b5ca378ba0c676cf9df">More...</a><br /></td></tr>
+<tr class="separator:acc1218ef75d84b5ca378ba0c676cf9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3ee9dceea2e734d08ee6907b1aa591f"><td class="memTemplParams" colspan="2">template&lt;typename Fn , typename NewValue  = std::invoke_result_t&lt;Fn, Value&gt;&gt; </td></tr>
 <tr class="memitem:af3ee9dceea2e734d08ee6907b1aa591f"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classresult_1_1_result.html">Result</a>&lt; NewValue, Error &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classresult_1_1_result.html#af3ee9dceea2e734d08ee6907b1aa591f">map</a> (Fn fn)</td></tr>
 <tr class="memdesc:af3ee9dceea2e734d08ee6907b1aa591f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps OK value of <a class="el" href="classresult_1_1_result.html" title="Result type that represents two-possible outcomes: ">Result</a> into different value/type.  <a href="#af3ee9dceea2e734d08ee6907b1aa591f">More...</a><br /></td></tr>
@@ -738,6 +744,66 @@ template&lt;class Value, class Error&gt; </div>
           <td>(</td>
           <td class="paramtype">Value &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a> or, if it is not ok, other. </p>
+<dl class="section note"><dt>Note</dt><dd>Moves out <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a>'s value </dd></dl>
+
+</div>
+</div>
+<a id="a6562ccc40044d1525eb5809588c4185f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6562ccc40044d1525eb5809588c4185f">&#9670;&nbsp;</a></span>unwrap_or_default() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Value, class Error&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Value <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap_or_default </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to unwrap result, yielding content of <a class="el" href="classresult_1_1_ok.html" title="Ok variant shortcut. ">Ok</a> or, default constructed value. </p>
+<p>This is only possible if <code>Value</code> is trivially copable. </p>
+
+</div>
+</div>
+<a id="acc1218ef75d84b5ca378ba0c676cf9df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc1218ef75d84b5ca378ba0c676cf9df">&#9670;&nbsp;</a></span>unwrap_or_default() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Value, class Error&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Value <a class="el" href="classresult_1_1_result.html">result::Result</a>&lt; Value, Error &gt;::unwrap_or_default </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td> &amp;&amp;</td>
         </tr>
       </table>
