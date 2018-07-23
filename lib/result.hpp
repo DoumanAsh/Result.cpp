@@ -259,25 +259,25 @@ class Result {
         ///Returns pointer to underlying value.
         ///
         ///@retval nullptr If not-OK.
-        constexpr Value* value() {
+        constexpr Value* value() noexcept {
             return is_ok() ? &store.ok : nullptr;
         }
         ///Returns pointer to underlying value.
         ///
         ///@retval nullptr If not-OK.
-        constexpr const Value* value() const {
+        constexpr const Value* value() const noexcept {
             return const_cast<Result*>(this)->value();
         }
         ///Returns pointer to underlying error.
         ///
         ///@retval nullptr If not-OK.
-        constexpr Error* error() {
+        constexpr Error* error() noexcept {
             return is_err() ? &store.error : nullptr;
         }
         ///Returns pointer to underlying error.
         ///
         ///@retval nullptr If not-OK.
-        constexpr const Error* error() const {
+        constexpr const Error* error() const noexcept {
             return const_cast<Result*>(this)->error();
         }
 
@@ -341,28 +341,26 @@ class Result {
         }
 
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
-        constexpr Value unwrap_or(Value&& other) const & {
-            Value result = is_ok() ? store.ok : std::move(other);
-            return result;
+        constexpr Value unwrap_or(Value&& other) const & noexcept(std::is_nothrow_move_constructible<Value>::value && std::is_nothrow_copy_constructible<Value>::value) {
+            return is_ok() ? store.ok : std::move(other);
         }
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         ///
         ///@note Moves out Ok's value
-        constexpr Value unwrap_or(Value&& other) && {
-            Value result = std::move(is_ok() ? store.ok : other);
-            return result;
+        constexpr Value unwrap_or(Value&& other) && noexcept(std::is_nothrow_move_constructible<Value>::value) {
+            return std::move(is_ok() ? store.ok : other);
         }
 
         ///Attempts to unwrap result, yielding content of Ok or, default constructed value.
         ///
         ///This is only possible if `Value` is trivially copable.
-        constexpr Value unwrap_or_default() const & {
+        constexpr Value unwrap_or_default() const & noexcept(std::is_nothrow_constructible<Value>::value && std::is_nothrow_copy_constructible<Value>::value) {
             return is_ok() ? store.ok : Value();
         }
         ///Attempts to unwrap result, yielding content of Ok or, if it is not ok, other.
         ///
         ///@note Moves out Ok's value
-        constexpr Value unwrap_or_default() && {
+        constexpr Value unwrap_or_default() && noexcept(std::is_nothrow_move_constructible<Value>::value && std::is_nothrow_constructible<Value>::value) {
             return is_ok() ? std::move(store.ok) : Value();
         }
 
