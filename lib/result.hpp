@@ -174,13 +174,13 @@ class Result {
 
         ///Creates Ok variant.
         template<class... T>
-        static decltype(auto) ok(T&&... value) noexcept(storage::is_value_noexcept) {
+        static Result<Value, Error> ok(T&&... value) noexcept(storage::is_value_noexcept) {
             return Result<Value, Error>(type::ok, internal::storage_ok, std::forward<T>(value)...);
         }
 
         ///Creates Error variant.
         template<class... E>
-        static decltype(auto) error(E&&... error) noexcept(storage::is_error_noexcept) {
+        static Result<Value, Error> error(E&&... error) noexcept(storage::is_error_noexcept) {
             return Result<Value, Error>(type::error, internal::storage_error, std::forward<E>(error)...);
         }
 
@@ -374,10 +374,10 @@ class Result {
             static_assert(std::is_invocable<Fn, Value>::value, "Fn must be callable and accept Value as argument");
 
             if (is_err()) {
-                auto error = std::move(this->store.error);
+                Error error = std::move(this->store.error);
                 return Result<NewValue, Error>::error(error);
             } else {
-                auto value = std::move(this->store.ok);
+                Value value = std::move(this->store.ok);
                 return Result<NewValue, Error>::ok(fn(value));
             }
         }
@@ -392,10 +392,10 @@ class Result {
             static_assert(std::is_invocable<Fn, Error>::value, "Fn must be callable and accept Error as argument");
 
             if (is_ok()) {
-                auto ok = std::move(this->store.ok);
+                Value ok = std::move(this->store.ok);
                 return Result<Value, NewError>::ok(ok);
             } else {
-                auto error = std::move(this->store.error);
+                Error error = std::move(this->store.error);
                 return Result<Value, NewError>::error(fn(error));
             }
         }
@@ -414,10 +414,10 @@ class Result {
             static_assert(std::is_same<typename NewResult::Err, Error>::value, "New Result must have the same Error type");
 
             if (is_ok()) {
-                auto ok = std::move(this->store.ok);
+                Value ok = std::move(this->store.ok);
                 return fn(ok);
             } else {
-                auto error = std::move(this->store.error);
+                Error error = std::move(this->store.error);
                 return NewResult::error(error);
             }
         }
@@ -436,10 +436,10 @@ class Result {
             static_assert(std::is_same<typename NewResult::Ok, Value>::value, "New Result must have the same Value type");
 
             if (is_ok()) {
-                auto ok = std::move(this->store.ok);
+                Value ok = std::move(this->store.ok);
                 return NewResult::ok(ok);
             } else {
-                auto error = std::move(this->store.error);
+                Error error = std::move(this->store.error);
                 return fn(error);
             }
         }
